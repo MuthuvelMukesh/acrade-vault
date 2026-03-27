@@ -1,0 +1,43 @@
+.crt-screen {
+  position: relative;
+}
+
+.crt-screen::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: radial-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+  z-index: 11;
+}
+
+.crt-screen::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.15),
+    rgba(0,0,0,0.15) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .crt-screen {
+    animation: flicker 0.15s infinite;
+  }
+}
+
+.power-on-fx {
+  animation: powerOn 0.8s ease-out forwards;
+}
+
+.flash-fx {
+  animation: flash 0.3s ease-out;
+}

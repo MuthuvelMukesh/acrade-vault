@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
+
+:root {
+  /* BASE LAYERS */
+  --color-void:        #050508;
+  --color-cabinet:     #0d0d14;
+  --color-screen:      #111118;
+  --color-bezel:       #1c1c28;
+  --color-panel:       #252535;
+  --color-border:      #363650;
+
+  /* PHOSPHOR NEON ACCENTS */
+  --neon-green:        #39ff14;
+  --neon-pink:         #ff2d78;
+  --neon-cyan:         #00e5ff;
+  --neon-yellow:       #ffe600;
+  --neon-purple:       #bf00ff;
+
+  /* TEXT HIERARCHY */
+  --text-primary:      #e8ffe8;
+  --text-secondary:    #8a9a8a;
+  --text-muted:        #4a5a4a;
+
+  /* GLOW SYSTEM */
+  --glow-green:   0 0 10px #39ff14, 0 0 30px rgba(57,255,20,0.4);
+  --glow-pink:    0 0 10px #ff2d78, 0 0 30px rgba(255,45,120,0.4);
+  --glow-cyan:    0 0 10px #00e5ff, 0 0 30px rgba(0,229,255,0.4);
+  --glow-yellow:  0 0 10px #ffe600, 0 0 30px rgba(255,230,0,0.4);
+
+  /* SPACING (8pt grid) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+
+  /* TYPOGRAPHY */
+  --font-arcade: "Press Start 2P", monospace;
+  --font-mono:   "Share Tech Mono", monospace;
+
+  /* COMPONENT SIZING TOKENS */
+  --target-min:       44px;
+  --target-game-btn:  56px;
+  --card-width:       320px;
+  --card-height:      200px;
+  --canvas-sm-w:      480px;
+  --canvas-sm-h:      320px;
+  --canvas-lg-w:      640px;
+  --canvas-lg-h:      400px;
+  --nav-height:       64px;
+  --marquee-height:   36px;
+  --radius-sm:        2px;
+  --radius-md:        4px;
+  --radius-lg:        8px;
+}

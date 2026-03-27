@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Arcade Vault</title>
+  <link rel="stylesheet" href="./styles/tokens.css">
+  <link rel="stylesheet" href="./styles/layout.css">
+  <link rel="stylesheet" href="./styles/components.css">
+  <link rel="stylesheet" href="./styles/effects.css">
+  <link rel="stylesheet" href="./styles/animations.css">
+</head>
+<body>
+  
+  <div id="marquee-container" aria-hidden="true">
+    <div class="marquee-text" id="marquee-content"></div>
+  </div>
+
+  <header id="top-bar">
+    <div class="logo">ARCADE VAULT</div>
+    <nav class="tabs" aria-label="Game Categories">
+      <button class="tab active" data-category="all"><span class="tab-icon">🕹️</span> <span class="tab-label">ALL</span></button>
+      <button class="tab" data-category="action"><span class="tab-icon">💥</span> <span class="tab-label">ACTION</span></button>
+      <button class="tab" data-category="puzzle"><span class="tab-icon">🧩</span> <span class="tab-label">PUZZLE</span></button>
+      <button class="tab" data-category="classic"><span class="tab-icon">👾</span> <span class="tab-label">CLASSIC</span></button>
+    </nav>
+    <div class="user-info">
+      <div class="coin-count">🪙 <span id="ui-coin-count">0</span></div>
+      <div class="initials-badge" id="ui-initials" style="cursor:pointer;" title="Click to view Achievements">---</div>
+    </div>
+  </header>
+
+  <main id="main-content" role="main">
+    <div id="hub-grid"></div>
+  </main>
+
+  <div id="game-overlay" role="dialog" aria-modal="true" class="crt-screen">
+    <div class="hud-strip">
+      <div>SCORE: <span id="hud-score">0</span></div>
+      <div><span id="hud-extra"></span></div>
+      <button id="btn-quit-game" aria-label="Quit game">QUIT</button>
+    </div>
+    <div class="canvas-wrapper">
+      <canvas id="game-canvas"></canvas>
+    </div>
+  </div>
+
+  <div id="touch-controls-panel"></div>
+  <div id="toast-container" aria-live="polite"></div>
+  
+  <!-- Screen Reader Score Region -->
+  <div id="sr-score-announcer" aria-live="polite" class="sr-only"></div>
+
+  <!-- Initials Modal -->
+  <div id="initials-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <h2 style="color:var(--neon-green)">ENTER INITIALS</h2>
+      <input type="text" id="initials-input" maxlength="3" autocomplete="off" placeholder="AAA">
+      <button id="btn-save-initials" class="btn-primary">SAVE</button>
+    </div>
+  </div>
+
+  <!-- Achievements Modal -->
+  <div id="achievements-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <h2 style="color:var(--neon-yellow)">🏆 ACHIEVEMENTS</h2>
+      <div id="achievements-list" style="text-align:left; font-size:10px; line-height:2; display:flex; flex-direction:column; gap:8px;"></div>
+      <button id="btn-close-achievements" class="btn-secondary" style="margin-top:16px;">CLOSE</button>
+    </div>
+  </div>
+
+  <!-- Game Over Modal -->
+  <div id="game-over-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content crt-screen">
+      <h2 style="color:var(--neon-pink)">GAME OVER</h2>
+      <p style="color:var(--neon-cyan); margin:10px 0;">SCORE: <span id="go-score">0</span></p>
+      <div class="modal-actions">
+        <button id="btn-play-again" class="btn-primary">PLAY AGAIN</button>
+        <button id="btn-back-hub" class="btn-secondary">ARCADE HUB</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./js/state.js"></script>
+  <script type="module" src="./js/hub.js"></script>
+</body>
+</html>

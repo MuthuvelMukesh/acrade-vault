@@ -1,0 +1,36 @@
+{
+  "leaderboards": {
+    "breaker": [
+      {
+        "initials": "MMK",
+        "score": 700,
+        "date": "2026-03-27T17:42:07.172Z"
+      },
+      {
+        "initials": "MMK",
+        "score": 100,
+        "date": "2026-03-27T17:41:52.112Z"
+      }
+    ]
+  },
+  "players": {
+    "AAA": {
+      "initials": "AAA",
+      "coins": 10,
+      "highScores": {},
+      "achievements": [],
+      "gamesPlayed": 0
+    },
+    "MMK": {
+      "initials": "MMK",
+      "coins": 10,
+      "highScores": {
+        "breaker": 700
+      },
+      "achievements": [
+        "FIRST_BLOOD"
+      ],
+      "gamesPlayed": 2
+    }
+  }
+}
