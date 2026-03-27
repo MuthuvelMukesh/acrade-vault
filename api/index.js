@@ -7,16 +7,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const DB_FILE = '/tmp/db.json';
+const DB_FILE = process.env.VERCEL ? '/tmp/db.json' : path.join(__dirname, '../db.json');
 
 function ensureDB() {
-  if (!fs.existsSync('/tmp')) {
-    try { fs.mkdirSync('/tmp'); } catch(e) {}
-  }
   if (!fs.existsSync(DB_FILE)) {
     try {
       fs.writeFileSync(DB_FILE, JSON.stringify({ leaderboards: {}, players: {} }));
-    } catch(e) {}
+    } catch(e) {
+      console.error("Failed to initialize database file", e);
+    }
   }
 }
 
@@ -33,7 +32,11 @@ function readDB() {
 }
 
 function writeDB(data) {
-  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+  try {
+    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+  } catch(e) {
+    console.error("Failed to write to database file", e);
+  }
 }
 
 // API Routes
@@ -72,9 +75,19 @@ app.post('/api/players/:initials', (req, res) => {
   res.json({ success: true, player: db.players[initials] });
 });
 
-// For any other routes, send index.html (SPA routing support)
-app.get('*', (req, res) => {
-  res.json({ message: "API endpoint running." });
-});
-
-module.exports = app;
+// Check if running directly in Node vs Vercel Serverless
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.use(express.static(path.join(__dirname, '../'))); // Serve static files
+  
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../index.html'));
+  });
+  
+  app.listen(PORT, () => {
+    console.log(`Local Arcade Vault running on http://localhost:${PORT}`);
+  });
+} else {
+  // If required by Vercel serverless environment
+  module.exports = app;
+}
