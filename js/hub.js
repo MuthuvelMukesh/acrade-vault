@@ -56,12 +56,12 @@ export function initHub() {
     
     // Calculate EXP (Every 5 plays = 1 level, max out visual at 100% for current level)
     const xpPercent = (totalPlays % 5) * 20; 
-    document.getElementById('stat-xp-bar').style.width = \`\${xpPercent}%\`;
+    document.getElementById('stat-xp-bar').style.width = `${xpPercent}%`;
 
     if (p.achievements.length === 0) {
       list.innerHTML = '<p style="color:var(--text-secondary);text-align:center;">NO ACHIEVEMENTS YET</p>';
     } else {
-      list.innerHTML = p.achievements.map(a => \`<div style="color:var(--neon-green)">★ \${a.replace('_', ' ')}</div>\`).join('');
+      list.innerHTML = p.achievements.map(a => `<div style="color:var(--neon-green)">★ ${a.replace('_', ' ')}</div>`).join('');
     }
     
     modal.style.display = 'flex';
@@ -142,11 +142,13 @@ function updateUI() {
   
   // Set Marquee text
   let hs = 0;
-  for (const score of Object.values(State.player.highScores)) {
+  const scoresObj = State.player.highScores || {};
+  for (const score of Object.values(scoresObj)) {
     if (score > hs) hs = score;
   }
   const stringBase = `INSERT COIN · PRESS START · HIGH SCORE: ${hs} · PLAYER 1 · `;
-  document.getElementById('marquee-content').innerText = stringBase.repeat(10);
+  const marquee = document.getElementById('marquee-content');
+  if (marquee) marquee.innerText = stringBase.repeat(10);
 }
 
 function renderGrid() {
