@@ -26,6 +26,79 @@
   color: var(--neon-green);
   text-shadow: var(--glow-green);
   font-size: 14px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease);
+}
+
+.hover-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--neon-cyan);
+  font-size: var(--font-size-sm);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+  z-index: 5;
+  text-shadow: 0 0 5px var(--neon-cyan);
+}
+
+.game-card:hover .hover-overlay {
+  opacity: 1;
+}
+
+/* Simulated Game Previews via CSS */
+.preview-snake {
+  background: repeating-linear-gradient(45deg, #0f380f 0px, #0f380f 10px, #306230 10px, #306230 20px);
+}
+.preview-shooter {
+  background: radial-gradient(circle at center, #1b032d 0%, #000 100%);
+  position: relative;
+}
+.preview-shooter::after {
+  content: '🛸';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  opacity: 0.2;
+}
+.preview-breaker {
+  background: linear-gradient(to bottom, #001133, #000000);
+}
+.preview-breaker::before {
+  content: ''; position:absolute; top:20px; left:20px; right:20px; height:20px; 
+  background: repeating-linear-gradient(90deg, #ff0055 0px, #ff0055 20px, transparent 20px, transparent 25px);
+  opacity: 0.4;
+}
+.preview-tiles2048 {
+  background: #332222;
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  padding: 10px;
+}
+.preview-tiles2048::before {
+  content:''; background:#ff9900; opacity:0.3; grid-column:span 2; border-radius:4px;
+}
+.preview-memory {
+  background: #112233;
+}
+.preview-reaction {
+  background: repeating-radial-gradient(circle, #330000, #330000 10px, #000000 10px, #000000 20px);
+}
+
+.game-card:hover .game-preview {
+  transform: scale(1.05);
+}
+
+.game-card:hover .game-preview::after,
+.game-card:hover .game-preview::before {
+  animation: pulse 1s infinite alternate;
+  opacity: 0.8;
 }
 
 .game-info {
@@ -238,3 +311,4 @@
   background: var(--neon-pink);
   color: var(--color-void);
 }
+".modal-content { animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }" 

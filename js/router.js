@@ -55,6 +55,8 @@ export const Router = {
     this.currentGameInstance.start();
     
     State.player.gamesPlayed++;
+    State.player.playCounts = State.player.playCounts || {};
+    State.player.playCounts[gameId] = (State.player.playCounts[gameId] || 0) + 1;
     Store.savePlayer();
   },
 

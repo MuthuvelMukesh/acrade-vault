@@ -12,7 +12,11 @@ Arcade Vault is a fully interactive, production-quality mini browser games hub. 
   - 🃏 **Memory Match**: Card flipping memory game.
   - ⚡ **Reaction Blitz**: Multi-stage reflex testing game.
 - **Retro-Futurist Aesthetics**: Immersive CRT scanlines, flicker effects, phosphor neon styling, and a dynamic marquee.
+- **Global CRT Toggle**: Apply a retro authentic scanline curvature effect over the entire application at the click of a button.
 - **Persistent Progression Engine**: Maintains your high scores, total coins, and unlocked achievements via a Node.js JSON backend + LocalStorage.
+- **Player Profiles & EXP**: Track your "Most Played" game and watch your overall EXP level bar visually increase based on arcade plays.
+- **Live Search & Categorization**: Instantly filter games dynamically by name or tags using the search bar or category tabs.
+- **Animated CSS Previews**: Hover over any arcade game card for a CSS-powered animated preview reminiscent of the selected game.
 - **Coin Economy**: Earn coins by playing games.
 - **Accessibility & Responsiveness**: 
   - Dynamic on-screen D-Pad and Action buttons for mobile touch devices.

@@ -38,10 +38,30 @@ export function initHub() {
     const list = document.getElementById('achievements-list');
     const p = Store.getPlayer();
     
+    // Populate stats
+    let totalPlays = 0;
+    let mostPlayedGameId = '---';
+    let highestPlays = 0;
+
+    for (const [gameId, plays] of Object.entries(p.playCounts || {})) {
+      totalPlays += plays;
+      if (plays > highestPlays) {
+        highestPlays = plays;
+        mostPlayedGameId = gameId;
+      }
+    }
+
+    const gameObj = GAME_CATALOG.find(g => g.id === mostPlayedGameId);
+    document.getElementById('stat-most-played').innerText = gameObj ? gameObj.title : '---';
+    
+    // Calculate EXP (Every 5 plays = 1 level, max out visual at 100% for current level)
+    const xpPercent = (totalPlays % 5) * 20; 
+    document.getElementById('stat-xp-bar').style.width = \`\${xpPercent}%\`;
+
     if (p.achievements.length === 0) {
       list.innerHTML = '<p style="color:var(--text-secondary);text-align:center;">NO ACHIEVEMENTS YET</p>';
     } else {
-      list.innerHTML = p.achievements.map(a => `<div style="color:var(--neon-green)">★ ${a.replace('_', ' ')}</div>`).join('');
+      list.innerHTML = p.achievements.map(a => \`<div style="color:var(--neon-green)">★ \${a.replace('_', ' ')}</div>\`).join('');
     }
     
     modal.style.display = 'flex';
@@ -51,7 +71,7 @@ export function initHub() {
     document.getElementById('achievements-modal').style.display = 'none';
   });
 
-  const tabs = document.querySelectorAll('.tab');
+  const tabs = document.querySelectorAll('.tab:not(#toggle-crt)');
   tabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
       tabs.forEach(t => t.classList.remove('active'));
@@ -60,6 +80,15 @@ export function initHub() {
       renderGrid();
     });
   });
+
+  // Global CRT Toggle
+  const crtBtn = document.getElementById('toggle-crt');
+  if (crtBtn) {
+    crtBtn.addEventListener('click', () => {
+      document.body.classList.toggle('crt-screen');
+      crtBtn.classList.toggle('active');
+    });
+  }
 
   const p = Store.getPlayer();
   if (!p.initials) {
@@ -77,6 +106,15 @@ export function initHub() {
   } else {
     // Attempt to sync offline loaded player to backend
     Store.apiSyncPlayer();
+  }
+  
+  // Search bar logic
+  const searchInput = document.getElementById('game-search');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      State.searchQuery = e.target.value.toLowerCase();
+      renderGrid();
+    });
   }
 
   checkDaily();
@@ -115,23 +153,28 @@ function renderGrid() {
   const grid = document.getElementById('hub-grid');
   grid.innerHTML = '';
   
-  const filtered = GAME_CATALOG.filter(g => 
-    State.activeCategory === 'all' || g.category === State.activeCategory
-  );
+  const filtered = GAME_CATALOG.filter(g => {
+    const categoryMatch = State.activeCategory === 'all' || g.category === State.activeCategory;
+    const searchMatch = !State.searchQuery || g.title.toLowerCase().includes(State.searchQuery) || g.category.includes(State.searchQuery);
+    return categoryMatch && searchMatch;
+  });
 
   filtered.forEach(game => {
     const lb = Store.getLeaderboard(game.id);
     const topScore = lb.length ? lb[0].score : 0;
     
+    // Create animated preview background mapping to game id
     const card = document.createElement('div');
     card.className = 'game-card';
     card.innerHTML = `
-      <div class="game-preview">
+      <div class="game-preview preview-${game.id}">
+        <div class="hover-overlay">CLICK TO PLAY</div>
         <div>${game.title}</div>
         ${topScore ? `<div class="leaderboard-peek" data-id="${game.id}" style="cursor:pointer; z-index:10;">🏆 ${topScore}</div>` : `<div class="leaderboard-peek" data-id="${game.id}" style="cursor:pointer; z-index:10;">🏆 0</div>`}
       </div>
       <div class="game-info">
         <div class="game-title">${game.title}</div>
+        <div style="font-size:10px; color:var(--text-secondary); margin-bottom:8px;">${game.category.toUpperCase()}</div>
         <button class="btn-insert-coin" data-id="${game.id}">INSERT COIN</button>
       </div>
     `;

@@ -2,6 +2,10 @@
   position: relative;
 }
 
+body.crt-screen::before, body.crt-screen::after {
+  position: fixed;
+}
+
 .crt-screen::before {
   content: " ";
   display: block;

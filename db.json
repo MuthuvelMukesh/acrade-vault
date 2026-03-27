@@ -19,7 +19,8 @@
       "coins": 10,
       "highScores": {},
       "achievements": [],
-      "gamesPlayed": 0
+      "gamesPlayed": 0,
+      "playCounts": {}
     },
     "MMK": {
       "initials": "MMK",
