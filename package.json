@@ -2,9 +2,8 @@
   "name": "arcade-vault",
   "version": "1.0.0",
   "description": "Arcade Vault with Backend",
-  "main": "server.js",
   "scripts": {
-    "dev": "node server.js"
+    "dev": "node local-server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
