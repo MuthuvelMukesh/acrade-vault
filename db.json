@@ -11,16 +11,57 @@
         "score": 100,
         "date": "2026-03-27T17:41:52.112Z"
       }
+    ],
+    "reaction": [
+      {
+        "initials": "AAA",
+        "score": 25,
+        "date": "2026-03-27T18:23:27.644Z"
+      }
+    ],
+    "memory": [
+      {
+        "initials": "AAA",
+        "score": 800,
+        "date": "2026-03-27T18:24:32.544Z"
+      }
+    ],
+    "snake": [
+      {
+        "initials": "AAA",
+        "score": 0,
+        "date": "2026-03-27T18:24:49.947Z"
+      },
+      {
+        "initials": "AAA",
+        "score": 0,
+        "date": "2026-03-27T18:24:53.064Z"
+      },
+      {
+        "initials": "AAA",
+        "score": 0,
+        "date": "2026-03-27T18:24:57.764Z"
+      }
     ]
   },
   "players": {
     "AAA": {
       "initials": "AAA",
-      "coins": 10,
-      "highScores": {},
-      "achievements": [],
-      "gamesPlayed": 0,
-      "playCounts": {}
+      "coins": 14,
+      "highScores": {
+        "reaction": 25,
+        "memory": 800
+      },
+      "achievements": [
+        "FIRST_BLOOD"
+      ],
+      "gamesPlayed": 6,
+      "playCounts": {
+        "tiles2048": 1,
+        "reaction": 1,
+        "memory": 1,
+        "snake": 3
+      }
     },
     "MMK": {
       "initials": "MMK",
