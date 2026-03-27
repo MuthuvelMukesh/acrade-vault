@@ -175,8 +175,10 @@ function renderGrid() {
         ${topScore ? `<div class="leaderboard-peek" data-id="${game.id}" style="cursor:pointer; z-index:10;">🏆 ${topScore}</div>` : `<div class="leaderboard-peek" data-id="${game.id}" style="cursor:pointer; z-index:10;">🏆 0</div>`}
       </div>
       <div class="game-info">
-        <div class="game-title">${game.title}</div>
-        <div style="font-size:10px; color:var(--text-secondary); margin-bottom:8px;">${game.category.toUpperCase()}</div>
+        <div class="info-text" style="display:flex; flex-direction:column; gap:4px;">
+          <div class="game-title">${game.title}</div>
+          <div style="font-size:10px; color:var(--text-secondary);">${game.category.toUpperCase()}</div>
+        </div>
         <button class="btn-insert-coin" data-id="${game.id}">INSERT COIN</button>
       </div>
     `;

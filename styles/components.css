@@ -61,10 +61,10 @@
 .preview-shooter::after {
   content: '🛸';
   position: absolute;
-  top: 50%; left: 50%;
+  top: 70%; left: 50%;
   transform: translate(-50%, -50%);
   font-size: 2rem;
-  opacity: 0.2;
+  opacity: 0.3;
 }
 .preview-breaker {
   background: linear-gradient(to bottom, #001133, #000000);
@@ -72,17 +72,19 @@
 .preview-breaker::before {
   content: ''; position:absolute; top:20px; left:20px; right:20px; height:20px; 
   background: repeating-linear-gradient(90deg, #ff0055 0px, #ff0055 20px, transparent 20px, transparent 25px);
-  opacity: 0.4;
+  opacity: 0.6;
 }
 .preview-tiles2048 {
-  background: #332222;
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
-  padding: 10px;
+  background: repeating-linear-gradient(
+    90deg,
+    #443333 0px,
+    #443333 30px,
+    #332222 30px,
+    #332222 60px
+  );
 }
 .preview-tiles2048::before {
-  content:''; background:#ff9900; opacity:0.3; grid-column:span 2; border-radius:4px;
+  content:''; position:absolute; top:20px; left:20px; width:40px; height:40px; background:#ff9900; opacity:0.6; border-radius:4px;
 }
 .preview-memory {
   background: #112233;
@@ -127,6 +129,8 @@
   border-radius: var(--radius-sm);
   transition: all 0.2s;
   min-height: var(--target-min);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .btn-insert-coin:hover {
