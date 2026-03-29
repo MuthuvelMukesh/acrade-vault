@@ -168,6 +168,7 @@ function renderGrid() {
     // Create animated preview background mapping to game id
     const card = document.createElement('div');
     card.className = 'game-card';
+    card.tabIndex = 0; // Make focusable for TV/Keyboard
     card.innerHTML = `
       <div class="game-preview preview-${game.id}">
         <div class="hover-overlay">CLICK TO PLAY</div>
@@ -179,23 +180,27 @@ function renderGrid() {
           <div class="game-title">${game.title}</div>
           <div style="font-size:10px; color:var(--text-secondary);">${game.category.toUpperCase()}</div>
         </div>
-        <button class="btn-insert-coin" data-id="${game.id}">INSERT COIN</button>
+        <button class="btn-insert-coin" data-id="${game.id}" tabindex="-1">INSERT COIN</button>
       </div>
     `;
+    
+    // Launch game on card click or Enter key (TV remote support)
+    const launch = () => Bus.emit('game:launch', game.id);
+    card.addEventListener('click', (e) => {
+      if (!e.target.closest('.leaderboard-peek')) launch();
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        launch();
+      }
+    });
+
     grid.appendChild(card);
   });
 
   document.querySelectorAll('.btn-insert-coin').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      Bus.emit('game:launch', e.target.dataset.id);
-    });
-  });
-
-  document.querySelectorAll('.leaderboard-peek').forEach(peek => {
-    peek.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const lb = Store.getLeaderboard(e.target.dataset.id);
-      
+    // Relying on parent card click, just keeping button for visual effect
       const overlay = document.createElement('div');
       overlay.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column;';
       
