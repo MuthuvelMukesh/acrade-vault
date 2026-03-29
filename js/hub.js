@@ -3,6 +3,7 @@ import { Bus } from './bus.js';
 import { Store } from './store.js';
 import { Router } from './router.js';
 import { FX } from './animator.js';
+import { Sound } from './audio.js';
 
 const GAME_CATALOG = [
   { id: 'snake', title: 'PIXEL SNAKE', category: 'classic' },
@@ -14,6 +15,8 @@ const GAME_CATALOG = [
 ];
 
 export function initHub() {
+  Sound.init();
+
   Bus.on('view:hub', () => Router.showHub());
   Bus.on('game:launch', (id) => Router.launchGame(id));
   
@@ -23,6 +26,7 @@ export function initHub() {
     updateUI();
     const el = document.getElementById('ui-coin-count');
     FX.coinBounce(el, amt);
+    Sound.playCoin();
   });
   
   Bus.on('achievement:unlock', (ach) => {
@@ -74,6 +78,7 @@ export function initHub() {
   const tabs = document.querySelectorAll('.tab:not(#toggle-crt)');
   tabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
+      Sound.playBlip();
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       State.activeCategory = tab.dataset.category;
@@ -185,7 +190,10 @@ function renderGrid() {
     `;
     
     // Launch game on card click or Enter key (TV remote support)
-    const launch = () => Bus.emit('game:launch', game.id);
+    const launch = () => {
+      Sound.playCoin();
+      Bus.emit('game:launch', game.id);
+    };
     card.addEventListener('click', (e) => {
       if (!e.target.closest('.leaderboard-peek')) launch();
     });

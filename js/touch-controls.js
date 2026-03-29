@@ -1,3 +1,5 @@
+import { Sound } from './audio.js';
+
 export const TouchControls = {
   container: null,
   activeKeys: new Set(),
@@ -16,6 +18,9 @@ export const TouchControls = {
     if (!this.activeKeys.has(key)) {
       this.activeKeys.add(key);
       this.dispatchKey(key, 'keydown');
+      // Haptics & Sound for phase 1
+      if (navigator.vibrate) navigator.vibrate(15);
+      Sound.playBlip();
     }
   },
 
@@ -112,4 +117,6 @@ export const TouchControls = {
       if (isTouch) {
         this.container.style.display = 'flex';
       }
+    }
+  }
 };

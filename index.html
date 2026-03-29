@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#111116">
   <title>Arcade Vault</title>
+  <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="./styles/tokens.css">
   <link rel="stylesheet" href="./styles/layout.css">
   <link rel="stylesheet" href="./styles/components.css">
@@ -91,5 +93,14 @@
 
   <script type="module" src="./js/state.js"></script>
   <script type="module" src="./js/hub.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('SW registered!', reg))
+          .catch(err => console.error('SW registration failed!', err));
+      });
+    }
+  </script>
 </body>
 </html>
