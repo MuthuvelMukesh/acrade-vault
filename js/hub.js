@@ -90,8 +90,50 @@ export function initHub() {
   const crtBtn = document.getElementById('toggle-crt');
   if (crtBtn) {
     crtBtn.addEventListener('click', () => {
+      Sound.playBlip();
       document.body.classList.toggle('crt-screen');
       crtBtn.classList.toggle('active');
+    });
+  }
+
+  // Settings Modal Toggle (Phase 2 Custom Controls)
+  const settingsBtn = document.getElementById('toggle-settings');
+  if (settingsBtn) {
+    settingsBtn.addEventListener('click', () => {
+      Sound.playBlip();
+      const modal = document.getElementById('settings-modal');
+      const actionBtn = document.getElementById('btn-remap-action');
+      const pauseBtn = document.getElementById('btn-remap-pause');
+      
+      // Setup current bindings from State
+      actionBtn.innerText = State.controls.action === ' ' ? 'Space' : State.controls.action;
+      pauseBtn.innerText = State.controls.pause;
+
+      const handleRemap = (btn, keyName) => {
+        btn.innerText = 'PRESS KEY...';
+        const onKeyPress = (e) => {
+          e.preventDefault();
+          const newKey = e.key;
+          State.controls[keyName] = newKey;
+          btn.innerText = newKey === ' ' ? 'Space' : newKey;
+          Store.saveSettings();
+          document.removeEventListener('keydown', onKeyPress);
+        };
+        document.addEventListener('keydown', onKeyPress, { once: true });
+      };
+
+      actionBtn.onclick = () => handleRemap(actionBtn, 'action');
+      pauseBtn.onclick = () => handleRemap(pauseBtn, 'pause');
+
+      modal.style.display = 'flex';
+    });
+  }
+
+  const closeSettingsBtn = document.getElementById('btn-close-settings');
+  if (closeSettingsBtn) {
+    closeSettingsBtn.addEventListener('click', () => {
+      Sound.playBlip();
+      document.getElementById('settings-modal').style.display = 'none';
     });
   }
 

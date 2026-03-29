@@ -1,3 +1,5 @@
+import { State } from './state.js';
+
 export class BaseGame {
   constructor(canvas, onGameOver) {
     this.canvas = canvas;
@@ -86,7 +88,8 @@ export class BaseGame {
       'ArrowDown': gp.buttons[13]?.pressed || stickDown,
       'ArrowLeft': gp.buttons[14]?.pressed || stickLeft,
       'ArrowRight': gp.buttons[15]?.pressed || stickRight,
-      ' ': gp.buttons[0]?.pressed // A/X button mapping equivalent to space/enter
+      [State.controls.action]: gp.buttons[0]?.pressed,
+      [State.controls.pause]: gp.buttons[1]?.pressed
     };
 
     for (const key of Object.keys(currentButtons)) {

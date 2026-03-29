@@ -1,4 +1,5 @@
 import { Sound } from './audio.js';
+import { State } from './state.js';
 
 export const TouchControls = {
   container: null,
@@ -80,7 +81,7 @@ export const TouchControls = {
       const btn = document.createElement('div');
       btn.className = 'action-btn';
       btn.innerText = action.label;
-      const mappedKey = action.label === 'FIRE' ? ' ' : 'Enter';
+      const mappedKey = action.label === 'FIRE' ? State.controls.action : 'Enter';
       
       btn.addEventListener('touchstart', (e) => {
         this.handleTouchStart(e, mappedKey);

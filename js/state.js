@@ -4,6 +4,10 @@ export const State = {
   activeCategory: 'all',
   searchQuery: '',       // NEW: tracking search input
   gameRunning: false,
+  controls: {
+    action: ' ',
+    pause: 'Escape'
+  },
   player: {
     initials: '',
     coins: 0,

@@ -24,11 +24,18 @@ export const Store = {
     if (saved) {
       Object.assign(State.player, saved);
     }
+    const savedSettings = this.get('arcade_settings');
+    if (savedSettings) {
+      Object.assign(State.controls, savedSettings);
+    }
     return State.player;
   },
   savePlayer() {
     this.set('arcade_player', State.player);
     this.apiSyncPlayer();
+  },
+  saveSettings() {
+    this.set('arcade_settings', State.controls);
   },
   getLeaderboard(gameId) {
     return this.get(`arcade_lb_${gameId}`) || [];

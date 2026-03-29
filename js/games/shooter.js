@@ -52,7 +52,7 @@ export class ShooterGame extends BaseGame {
     // Player Move
     if (this.keys['ArrowLeft']) this.player.x -= this.player.speed * sec;
     if (this.keys['ArrowRight']) this.player.x += this.player.speed * sec;
-    if (this.keys[' ']) this.shoot();
+    if (this.keys[State.controls.action] || this.keys[' ']) this.shoot();
     this.player.x = Math.max(10, Math.min(470, this.player.x));
 
     // Spawning
