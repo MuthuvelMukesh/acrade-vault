@@ -249,8 +249,13 @@ function renderGrid() {
     grid.appendChild(card);
   });
 
-  document.querySelectorAll('.btn-insert-coin').forEach(btn => {
-    // Relying on parent card click, just keeping button for visual effect
+  document.querySelectorAll('.leaderboard-peek').forEach(peekBtn => {
+    peekBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      Sound.playBlip();
+      const gameId = peekBtn.dataset.id;
+      const lb = Store.getLeaderboard(gameId);
+
       const overlay = document.createElement('div');
       overlay.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column;';
       
@@ -270,13 +275,16 @@ function renderGrid() {
       }
       html += '</div>';
       
-      const btn = document.createElement('button');
-      btn.innerText = 'CLOSE';
-      btn.style.cssText = 'background:transparent; border:1px solid var(--neon-pink); color:var(--neon-pink); font-family:var(--font-arcade); padding:10px 20px; cursor:pointer;';
-      btn.onclick = () => overlay.remove();
+      const closeBtn = document.createElement('button');
+      closeBtn.innerText = 'CLOSE';
+      closeBtn.style.cssText = 'background:transparent; border:1px solid var(--neon-pink); color:var(--neon-pink); font-family:var(--font-arcade); padding:10px 20px; cursor:pointer; margin-top:10px;';
+      closeBtn.onclick = () => {
+        Sound.playBlip();
+        overlay.remove();
+      };
       
       box.innerHTML = html;
-      box.appendChild(btn);
+      box.appendChild(closeBtn);
       overlay.appendChild(box);
       document.body.appendChild(overlay);
     });
