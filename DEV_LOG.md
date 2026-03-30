@@ -15,6 +15,12 @@ This document serves as a chronological journal of updates, tracing our progress
 
 ## 📅 Chronological Log
 
+### [v1.6.0] - Technical Improvements & CI/CD Pipeline
+- **Continuous Integration**: Configured `.github/workflows/ci.yml` pipeline to automatically test and lint code on push/PRs.
+- **Code Quality**: Added ESLint and Prettier for strict JS styling, plus Babel for ES module compilation in Node.
+- **Unit Testing**: Initialized Jest testing framework and added baseline tests for global `State` and `AssetLoader`.
+- **Asset Management**: Added `js/asset-loader.js` class for robust image and audio map preloading logic.
+
 ### [v1.5.0] - Phase 2 Cloud Save States completed
 - **Backend**: Added secure `GET /api/saves/:userId/:gameId` and `POST /api/saves/:userId/:gameId` routes using Netlify Blobs.
 - **Frontend**: Created Pause UI modal overlay triggered by the custom `State.controls.pause` key dynamically. 

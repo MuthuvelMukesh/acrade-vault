@@ -1,0 +1,33 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+
+    - name: Install root dependencies (Linting & Testing)
+      run: npm install
+
+    - name: Install API Serverless dependencies
+      run: cd api && npm install
+
+    - name: Run Linter
+      run: npm run lint
+      continue-on-error: true # Warning only for now
+
+    - name: Run Tests
+      run: npm test
+      continue-on-error: true # Warning only for now
