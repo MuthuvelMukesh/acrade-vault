@@ -27,7 +27,16 @@ This document outlines the product strategy, upcoming features, and technical im
 - **~~Real-Time Multiplayer:~~** Introduce WebSockets/Socket.io to allow head-to-head network play (e.g., Pong-Vs or Co-op Snake). *(Done - WebRTC/PeerJS P2P)*
 - **~~Achievements & Trophies System:~~** Unlockable badges for reaching certain milestones in different games. *(Done - Integrated `store.js` engine + Toast Modals)*
 - **~~Native App Packaging:~~** Use tools like Capacitor or Tauri to wrap the web app into a native `.apk` (Android) or Windows executable to distribute on app stores. *(Done - `@capacitor/core` initialized w/ `build:mobile` script)*
-- **Monetization (Optional):** Unobtrusive banner ads on the main hub, or a "Premium" tier unlocking custom game themes and color palettes.
+
+### Phase 4: The Meta-Game & Player Economy (Next Up)
+- **Virtual Currency Store:** Provide a marketplace where players can spend `State.player.coins` earned in-game to purchase custom Hub UI themes, neon color palettes, or unique background CRT overlays.
+- **User-Generated Content (Level Editor):** Implement an in-browser visual grid editor for "Block Breaker" (or other spatial games). Save these custom tile maps to Netlify Blobs so players can share 5-digit level codes with friends.
+- **AI Competitors:** Train basic offline AI bots for "Pong-Vs" to dynamically scale difficulty depending on the player's active win streak.
+
+### Phase 5: Deep Social Integration (Future Vision)
+- **Persistent Lobbies & Matchmaking:** Shift from manual 5-digit room codes to a dedicated lobby matchmaking queue utilizing a serverless Redis/Supabase backplane. 
+- **Friends Lists & Presence:** Allow authenticated users to add each other and see an active "Online/In-Game" status indicator on the Hub UI via WebSocket or server-sent events polling.
+- **Ghost Data Racing:** Allow players to download the "Ghost Data" of the #1 Global Leaderboard player for specific games (like fastest Reaction Blitz time) and visually compete against them locally.
 
 ---
 
