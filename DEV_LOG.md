@@ -15,6 +15,11 @@ This document serves as a chronological journal of updates, tracing our progress
 
 ## 📅 Chronological Log
 
+### [v2.0.0] - Phase 3 Mobile App & Achievements
+- **Native Android APK Initialization**: Added `@capacitor/core` and `@capacitor/cli`. Generated `/android` working directory. App can now be built entirely as a native Android or iOS application!
+- **Build Pipeline**: Created locally-scoped `scripts/build.js` that pulls necessary public assets and dumps them to `/dist` to isolate native bundling from AWS Lambda files.
+- **Achievements Framework Complete**: Plumbed the missing `toast-container` to `index.html` allowing `FX.achievementToast` to successfully slide in on milestones (like 50 coins or scoring 200 in Snake).
+
 ### [v1.6.0] - Technical Improvements & CI/CD Pipeline
 - **Continuous Integration**: Configured `.github/workflows/ci.yml` pipeline to automatically test and lint code on push/PRs.
 - **Code Quality**: Added ESLint and Prettier for strict JS styling, plus Babel for ES module compilation in Node.

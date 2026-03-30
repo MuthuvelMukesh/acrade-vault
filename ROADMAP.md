@@ -25,8 +25,8 @@ This document outlines the product strategy, upcoming features, and technical im
 
 ### Phase 3: Long-Term (6+ Months) - "Expansion & Multiplayer"
 - **Real-Time Multiplayer:** Introduce WebSockets/Socket.io to allow head-to-head network play (e.g., Pong-Vs or Co-op Snake).
-- **Achievements & Trophies System:** Unlockable badges for reaching certain milestones in different games.
-- **Native App Packaging:** Use tools like Capacitor or Tauri to wrap the web app into a native `.apk` (Android) or Windows executable to distribute on app stores.
+- **~~Achievements & Trophies System:~~** Unlockable badges for reaching certain milestones in different games. *(Done - Integrated `store.js` engine + Toast Modals)*
+- **~~Native App Packaging:~~** Use tools like Capacitor or Tauri to wrap the web app into a native `.apk` (Android) or Windows executable to distribute on app stores. *(Done - `@capacitor/core` initialized w/ `build:mobile` script)*
 - **Monetization (Optional):** Unobtrusive banner ads on the main hub, or a "Premium" tier unlocking custom game themes and color palettes.
 
 ---

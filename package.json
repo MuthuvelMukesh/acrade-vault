@@ -4,6 +4,7 @@
   "description": "Arcade Vault is a cross-platform HTML5 retro arcade platform with PWA support, serverless backend, and native mobile/TV controller integration.",
   "main": "sw.js",
   "dependencies": {
+    "@capacitor/core": "^8.3.0",
     "accepts": "^1.3.8",
     "array-flatten": "^1.1.1",
     "body-parser": "^1.20.4",
@@ -74,11 +75,11 @@
     "utils-merge": "^1.0.1",
     "vary": "^1.1.2"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build:mobile": "node scripts/build.js && npx cap copy"
   },
   "repository": {
     "type": "git",
@@ -91,5 +92,9 @@
   "bugs": {
     "url": "https://github.com/MuthuvelMukesh/acrade-vault/issues"
   },
-  "homepage": "https://github.com/MuthuvelMukesh/acrade-vault#readme"
+  "homepage": "https://github.com/MuthuvelMukesh/acrade-vault#readme",
+  "devDependencies": {
+    "@capacitor/android": "^8.3.0",
+    "@capacitor/cli": "^8.3.0"
+  }
 }
