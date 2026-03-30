@@ -24,8 +24,6 @@ export function initHub() {
   
   Bus.on('coin:earn', (amt) => {
     State.player.coins += amt;
-    Store.savePlayer();
-    updateUI();
     const el = document.getElementById('ui-coin-count');
     FX.coinBounce(el, amt);
     Sound.playCoin();
@@ -120,7 +118,6 @@ export function initHub() {
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       State.activeCategory = tab.dataset.category;
-      renderGrid();
     });
   });
 
@@ -183,9 +180,7 @@ export function initHub() {
       const val = document.getElementById('initials-input').value.trim().toUpperCase();
       if(val.length > 0) {
         p.initials = val.substring(0,3);
-        Store.savePlayer();
         modal.style.display = 'none';
-        updateUI();
       }
     });
   } else {
@@ -198,7 +193,6 @@ export function initHub() {
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
       State.searchQuery = e.target.value.toLowerCase();
-      renderGrid();
     });
   }
 
@@ -227,6 +221,16 @@ export function initHub() {
   checkDaily();
   updateUI();
   fetchAllLeaderboards();
+
+  // Unified State Reactions
+  Bus.on('state:updated', ({ path }) => {
+    if (path.startsWith('player.coins') || path.startsWith('player.initials') || path.startsWith('player.highScores')) {
+      updateUI();
+    }
+    if (path === 'activeCategory' || path === 'searchQuery' || path.startsWith('player.highScores')) {
+      renderGrid();
+    }
+  });
 }
 
 async function fetchAllLeaderboards() {

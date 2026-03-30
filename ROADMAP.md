@@ -36,7 +36,7 @@ This document outlines the product strategy, upcoming features, and technical im
 1. **~~Asset Management & Preloading:~~** *(Done - `AssetLoader` class implemented for scalable pre-fetching)*
    - Create an asset loader that pre-fetches all images/sprites and audio files before the hub loads, avoiding missing frames during initial gameplay.
    - Combine isolated images into Sprite Sheets to reduce HTTP requests.
-2. **State Management Refactor:**
+2. **~~State Management Refactor:~~** *(Done - Deep reactive Proxy store implemented over the `Bus` emitter)*
    - Move away from raw global variables and DOM manipulation, possibly integrating a lightweight state manager if the application's complexity scales.
 3. **Advanced Rendering:**
    - If games become more graphically intense, migrate from `Canvas 2D API` to `WebGL` (using PixiJS or Three.js) for hardware-accelerated 60fps locking on lower-end TVs.

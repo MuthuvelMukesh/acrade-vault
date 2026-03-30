@@ -5,15 +5,18 @@ This document serves as a chronological journal of updates, tracing our progress
 ---
 
 ## 🎯 Current Target
-**Executing Phase 2 (Community & Cloud)**
-- [x] Custom Controls (Remapping UI & logic)
-- [x] Global Leaderboards (Connecting Netlify Blobs key-value cloud store)
-- [x] User Authentication & Profiles (OAuth integration via Netlify Identity)
-- [x] Cloud Save States
+**Executing Technical Backlog (Deep Polish)**
+- [x] Asset Loader
+- [x] CI/CD Pipeline & Tests
+- [x] State Management Refactor
 
 ---
 
 ## 📅 Chronological Log
+
+### [v2.1.0] - State Management Framework
+- **Lightweight State System**: Refactored `state.js` from a raw global mutable object into a `Proxy`-based reactive state container. Intersects gracefully with the `bus.js` emitter.
+- **Global Data Binding**: Completely scrubbed one-off `updateUI()` and DOM manipulations from `hub.js` components. Event listeners automatically intercept deep proxy events (e.g., `state:updated:player.coins`) handling synchronous data injection, local `arcade_player` save bouncing, and immediate component refreshes without breaking layout loops.
 
 ### [v2.0.0] - Phase 3 Mobile App & Achievements
 - **Native Android APK Initialization**: Added `@capacitor/core` and `@capacitor/cli`. Generated `/android` working directory. App can now be built entirely as a native Android or iOS application!

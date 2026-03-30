@@ -51,7 +51,6 @@ export const Store = {
     // Update player high score
     if ((State.player.highScores[gameId] || 0) < score) {
       State.player.highScores[gameId] = score;
-      this.savePlayer();
     }
 
     // Sync to Backend
@@ -134,9 +133,26 @@ export const Store = {
       }
     }
     if (unlocked.length > 0) {
-      this.savePlayer();
       unlocked.forEach(a => Bus.emit('achievement:unlock', a));
     }
     return unlocked;
   }
 };
+
+// Auto-save mechanisms with debouncing to prevent thrashing
+let savePlayerTimeout = null;
+let saveSettingsTimeout = null;
+
+Bus.on('state:updated', ({ path }) => {
+  if (path.startsWith('player')) {
+    clearTimeout(savePlayerTimeout);
+    savePlayerTimeout = setTimeout(() => {
+      Store.savePlayer();
+    }, 500); // Debounce to allow grouped assignments
+  } else if (path.startsWith('controls')) {
+    clearTimeout(saveSettingsTimeout);
+    saveSettingsTimeout = setTimeout(() => {
+      Store.saveSettings();
+    }, 500);
+  }
+});
