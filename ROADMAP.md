@@ -13,9 +13,9 @@ This document outlines the product strategy, upcoming features, and technical im
 
 ### Phase 1: Short-Term (1-3 Months) - "Retention & Polish"
 - **~~Progressive Web App (PWA):~~** Add a `manifest.json` and Service Workers to allow users to "Install" the app on their phone/TV and play offline. *(Done)*
-- **Local High Scores:** Implement `localStorage` caching so users don't lose their best scores when they close the browser.
-- **New Games:** Add 2-3 new classic game clones (e.g., Tetris, Breakout, or Pac-Man) using the existing `base-game.js` boilerplate.
-- **Sound & Haptics:** Add an Audio engine (`Howler.js` or native Web Audio API) for 8-bit sound effects. Add Mobile device vibration API for button presses and collisions.
+- **~~Local High Scores:~~** Implement `localStorage` caching so users don't lose their best scores when they close the browser. *(Done)*
+- **~~New Games:~~** Add 2-3 new classic game clones (e.g., Tetris, Breakout, or Pac-Man) using the existing `base-game.js` boilerplate. *(Done - We have 7 distinct games)*
+- **~~Sound & Haptics:~~** Add an Audio engine (`Howler.js` or native Web Audio API) for 8-bit sound effects. Add Mobile device vibration API for button presses and collisions. *(Done - Web Audio API & `navigator.vibrate()` implemented)*
 
 ### Phase 2: Medium-Term (3-6 Months) - "Community & Cloud"
 - **~~Global Leaderboards:~~** Utilize our Netlify Functions (`api/index.js`) hooked to a lightweight database (like Supabase, Firebase, or MongoDB) to store and fetch top 10 global scores. *(Done - Netlify Blobs)*

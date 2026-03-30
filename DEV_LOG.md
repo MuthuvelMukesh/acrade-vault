@@ -64,4 +64,6 @@ This document serves as a chronological journal of updates, tracing our progress
 - **UI/UX Setup:** Finished retro HTML5 index framework equipped with pure CSS CRT scanline and phosphor glow effects.
 - **6 Core Games Linked:** Deployed and linked Snake, Space Shooter, Block Breaker, 2048 Tiles, Memory Match, and Reaction Blitz.
 - **Event Bus Pipeline:** Built an internal event emitter (`bus.js`) to handle UI state, notifications, Coin collections, and Player Exp generation concurrently off the main thread.
-- **Data Store:** Implemented JSON-like player object containing initialization logic, stats, and badges.
+- **Data Store:** Implemented JSON-like player object containing initialization logic, stats, and badges."### Local High Scores Complete!"  
+"- Verified localStorage state hydration for player profiles via \`js/store.js\`."  
+"- Added distinct 'BEST: [score]' UI tags directly inside the game selection cards in \`js/hub.js\` to visualize local caching decoupling from Global Leaderboards." 

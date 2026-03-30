@@ -287,6 +287,7 @@ function renderGrid() {
   filtered.forEach(game => {
     const lb = Store.getLeaderboard(game.id);
     const topScore = lb.length ? lb[0].score : 0;
+    const personalBest = State.player.highScores[game.id] || 0;
     
     // Create animated preview background mapping to game id
     const card = document.createElement('div');
@@ -296,12 +297,15 @@ function renderGrid() {
       <div class="game-preview preview-${game.id}">
         <div class="hover-overlay">CLICK TO PLAY</div>
         <div>${game.title}</div>
-        ${topScore ? `<div class="leaderboard-peek" data-id="${game.id}" style="cursor:pointer; z-index:10;">🏆 ${topScore}</div>` : `<div class="leaderboard-peek" data-id="${game.id}" style="cursor:pointer; z-index:10;">🏆 0</div>`}
+        ${topScore ? `<div class="leaderboard-peek" data-id="${game.id}" style="cursor:pointer; z-index:10;" title="Global High Score">🏆 ${topScore}</div>` : `<div class="leaderboard-peek" data-id="${game.id}" style="cursor:pointer; z-index:10;" title="Global High Score">🏆 0</div>`}
       </div>
       <div class="game-info">
         <div class="info-text" style="display:flex; flex-direction:column; gap:4px;">
           <div class="game-title">${game.title}</div>
-          <div style="font-size:10px; color:var(--text-secondary);">${game.category.toUpperCase()}</div>
+          <div style="font-size:10px; display:flex; justify-content:space-between; color:var(--text-secondary);">
+            <span>${game.category.toUpperCase()}</span>
+            <span style="color:var(--neon-yellow)">BEST: ${personalBest}</span>
+          </div>
         </div>
         <button class="btn-insert-coin" data-id="${game.id}" tabindex="-1">INSERT COIN</button>
       </div>
