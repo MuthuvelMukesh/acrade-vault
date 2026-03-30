@@ -12,7 +12,7 @@ This document outlines the product strategy, upcoming features, and technical im
 ## 📅 Product Plan
 
 ### Phase 1: Short-Term (1-3 Months) - "Retention & Polish"
-- **Progressive Web App (PWA):** Add a `manifest.json` and Service Workers to allow users to "Install" the app on their phone/TV and play offline.
+- **~~Progressive Web App (PWA):~~** Add a `manifest.json` and Service Workers to allow users to "Install" the app on their phone/TV and play offline. *(Done)*
 - **Local High Scores:** Implement `localStorage` caching so users don't lose their best scores when they close the browser.
 - **New Games:** Add 2-3 new classic game clones (e.g., Tetris, Breakout, or Pac-Man) using the existing `base-game.js` boilerplate.
 - **Sound & Haptics:** Add an Audio engine (`Howler.js` or native Web Audio API) for 8-bit sound effects. Add Mobile device vibration API for button presses and collisions.
@@ -24,7 +24,7 @@ This document outlines the product strategy, upcoming features, and technical im
 - **~~Save States:~~** Allow users to pause and save their exact game state in the cloud. *(Done - Integrated with Netlify Blobs & Netlify Identity)*
 
 ### Phase 3: Long-Term (6+ Months) - "Expansion & Multiplayer"
-- **Real-Time Multiplayer:** Introduce WebSockets/Socket.io to allow head-to-head network play (e.g., Pong-Vs or Co-op Snake).
+- **~~Real-Time Multiplayer:~~** Introduce WebSockets/Socket.io to allow head-to-head network play (e.g., Pong-Vs or Co-op Snake). *(Done - WebRTC/PeerJS P2P)*
 - **~~Achievements & Trophies System:~~** Unlockable badges for reaching certain milestones in different games. *(Done - Integrated `store.js` engine + Toast Modals)*
 - **~~Native App Packaging:~~** Use tools like Capacitor or Tauri to wrap the web app into a native `.apk` (Android) or Windows executable to distribute on app stores. *(Done - `@capacitor/core` initialized w/ `build:mobile` script)*
 - **Monetization (Optional):** Unobtrusive banner ads on the main hub, or a "Premium" tier unlocking custom game themes and color palettes.

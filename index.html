@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#111116">
   <title>Arcade Vault</title>
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="./manifest.json">
   <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script type="text/javascript" src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
   <link rel="stylesheet" href="./styles/tokens.css">
@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="./styles/components.css">
   <link rel="stylesheet" href="./styles/effects.css">
   <link rel="stylesheet" href="./styles/animations.css">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
 </head>
 <body>
   
@@ -158,7 +159,7 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.register('./sw.js')
           .then(reg => console.log('SW registered!', reg))
           .catch(err => console.error('SW registration failed!', err));
       });

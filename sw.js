@@ -1,28 +1,24 @@
-const CACHE_NAME = 'arcade-vault-v2';
+const CACHE_NAME = 'arcade-vault-v3';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/styles/tokens.css',
-  '/styles/layout.css',
-  '/styles/components.css',
-  '/styles/effects.css',
-  '/styles/animations.css',
-  '/js/state.js',
-  '/js/hub.js',
-  '/js/bus.js',
-  '/js/store.js',
-  '/js/router.js',
-  '/js/animator.js',
-  '/js/audio.js',
-  '/js/base-game.js',
-  '/js/touch-controls.js',
-  '/js/snake.js',
-  '/js/shooter.js',
-  '/js/breaker.js',
-  '/js/tiles2048.js',
-  '/js/memory.js',
-  '/js/reaction.js'
+  './',
+  './index.html',
+  './manifest.json',
+  './styles/tokens.css',
+  './styles/layout.css',
+  './styles/components.css',
+  './styles/effects.css',
+  './styles/animations.css',
+  './js/state.js',
+  './js/hub.js',
+  './js/bus.js',
+  './js/store.js',
+  './js/router.js',
+  './js/animator.js',
+  './js/audio.js',
+  './js/base-game.js',
+  './js/controls.js',
+  './js/asset-loader.js',
+  './js/multiplayer.js'
 ];
 
 self.addEventListener('install', (event) => {
