@@ -4,7 +4,7 @@ This document outlines the product strategy, upcoming features, and technical im
 
 ## 🚀 Current State
 - **Core Engine:** HTML5 Canvas based games with a universal underlying game loop (`base-game.js`).
-- **Infrastructure:** Serverless architecture optimized for Netlify deployments (`netlify.toml` / AWS Lambda).
+- **Zero-Cost Infrastructure:** 100% Free-tier serverless architecture. Optimized for Netlify (Functions, Identity, Blobs) and GitHub Actions (CI/CD) to ensure hosting, development, and deployment always cost $0.
 - **Controls & Accessibility:** Global support for keyboard, multi-touch mobile screens (virtual D-Pad), and TV Remotes / Bluetooth Controllers (Gamepad API).
 
 ---
@@ -34,7 +34,7 @@ This document outlines the product strategy, upcoming features, and technical im
 - **AI Competitors:** Train basic offline AI bots for "Pong-Vs" to dynamically scale difficulty depending on the player's active win streak.
 
 ### Phase 5: Deep Social Integration (Future Vision)
-- **Persistent Lobbies & Matchmaking:** Shift from manual 5-digit room codes to a dedicated lobby matchmaking queue utilizing a serverless Redis/Supabase backplane. 
+- **Persistent Lobbies & Matchmaking:** Shift from manual 5-digit room codes to a dedicated lobby matchmaking queue utilizing a serverless Redis/Supabase backplane (staying strictly within their generous Free Tiers). 
 - **Friends Lists & Presence:** Allow authenticated users to add each other and see an active "Online/In-Game" status indicator on the Hub UI via WebSocket or server-sent events polling.
 - **Ghost Data Racing:** Allow players to download the "Ghost Data" of the #1 Global Leaderboard player for specific games (like fastest Reaction Blitz time) and visually compete against them locally.
 - **Freemium Tier Integration:** Keep all core games completely free forever. Introduce an optional "Vault Pass" (Premium) that provides an completely ad-free experience, unique neon cosmetic UI unlocks, and expanded cloud-save capacities.
@@ -58,3 +58,6 @@ This document outlines the product strategy, upcoming features, and technical im
    - **Role-Based Access Control (RBAC):** Extend Netlify Identity to issue JWT metadata containing user tiers (Free vs. Premium). Guarantee that core gameplay routes remain unlocked and open to the public without paywalls.
    - **Dynamic Ad Sub-System:** Implement lazy-loaded ad modules (e.g., Capacitor AdMob for native, web banners for desktop) that are conditionally initialized. Premium users should completely bypass ad-tracking scripts to save bandwidth.
    - **Server-Side Validation:** Authoritatively validate purchases or unlocks for custom Hub UI themes and premium VIP features via Netlify Functions, preventing malicious clients from spoofing their "Premium" account status.
+7. **Strict $0 Infrastructure Policy:**
+   - Continue leveraging generous free tiers from platforms like Netlify (Hosting/Functions/Identity), Supabase (Postgres), or GitHub (Actions/Packages).
+   - Ensure all future architectural decisions scale horizontally without forcing a mandatory paid upgrade on the developer side.
