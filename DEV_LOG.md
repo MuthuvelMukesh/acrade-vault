@@ -7,13 +7,18 @@ This document serves as a chronological journal of updates, tracing our progress
 ## 🎯 Current Target
 **Executing Phase 2 (Community & Cloud)**
 - [x] Custom Controls (Remapping UI & logic)
-- [ ] Global Leaderboards (Connecting Netlify functions to a cloud DB)
+- [x] Global Leaderboards (Connecting Netlify Blobs key-value cloud store)
 - [ ] User Authentication & Profiles (OAuth integration)
 - [ ] Cloud Save States
 
 ---
 
 ## 📅 Chronological Log
+
+### [v1.3.0] - 2026-03-30 : Phase 2 Cloud Database (Netlify Blobs)
+- **Feature:** Replaced ephemeral `/tmp/db.json` with `@netlify/blobs` for persistent serverless data storage.
+- **Logic:** `api/index.js` now dynamically detects if it is running in a Netlify lambda container. If true, it automatically reads/writes Leaderboards and Player Stats directly to the Netlify Global Edge network using the Blobs SDK.
+- **Support:** Maintained a local Node.js filesystem fallback for when testing offline without standard Netlify build environments.
 
 ### [v1.2.0] - 2026-03-29 : Phase 2 Initiation (Custom Controls)
 - **Feature:** Added "Options" modal into the main hub UI for custom control bindings.
