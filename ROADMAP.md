@@ -18,9 +18,9 @@ This document outlines the product strategy, upcoming features, and technical im
 - **Sound & Haptics:** Add an Audio engine (`Howler.js` or native Web Audio API) for 8-bit sound effects. Add Mobile device vibration API for button presses and collisions.
 
 ### Phase 2: Medium-Term (3-6 Months) - "Community & Cloud"
-- **Global Leaderboards:** Utilize our Netlify Functions (`api/index.js`) hooked to a lightweight database (like Supabase, Firebase, or MongoDB) to store and fetch top 10 global scores.
-- **User Authentication:** Simple login system (e.g., Google/GitHub OAuth) to track player progress across multiple devices (Mobile to TV).
-- **Customizable Controls:** Allow users to remap keyboard keys or Gamepad buttons in an options menu.
+- **~~Global Leaderboards:~~** Utilize our Netlify Functions (`api/index.js`) hooked to a lightweight database (like Supabase, Firebase, or MongoDB) to store and fetch top 10 global scores. *(Done - Netlify Blobs)*
+- **~~User Authentication:~~** Simple login system (e.g., Google/GitHub OAuth) to track player progress across multiple devices (Mobile to TV). *(Done - Netlify Identity Widget)*
+- **~~Customizable Controls:~~** Allow users to remap keyboard keys or Gamepad buttons in an options menu. *(Done)*
 - **Save States:** Allow users to pause and save their exact game state in the cloud.
 
 ### Phase 3: Long-Term (6+ Months) - "Expansion & Multiplayer"

@@ -8,12 +8,16 @@ This document serves as a chronological journal of updates, tracing our progress
 **Executing Phase 2 (Community & Cloud)**
 - [x] Custom Controls (Remapping UI & logic)
 - [x] Global Leaderboards (Connecting Netlify Blobs key-value cloud store)
-- [ ] User Authentication & Profiles (OAuth integration)
+- [x] User Authentication & Profiles (OAuth integration via Netlify Identity)
 - [ ] Cloud Save States
 
 ---
 
 ## 📅 Chronological Log
+
+### [v1.4.0] - Phase 2 User Authentication
+- **Feature:** Added `netlify-identity-widget` out-of-the-box user authentication.
+- **UI Adjustments:** Updated `index.html` to inject the widget script. Reconfigured `js/hub.js` top-bar logic to emit `netlifyIdentity` login/logout event hooks and dynamically display a LOGIN button without requiring custom JWT servers.
 
 ### [v1.3.0] - 2026-03-30 : Phase 2 Cloud Database (Netlify Blobs)
 - **Feature:** Replaced ephemeral `/tmp/db.json` with `@netlify/blobs` for persistent serverless data storage.

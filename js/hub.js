@@ -164,6 +164,28 @@ export function initHub() {
     });
   }
 
+  // Netlify Identity Auth Integration
+  const authBtn = document.getElementById('ui-auth');
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => updateAuthUI(user));
+    window.netlifyIdentity.on("login", user => {
+      updateAuthUI(user);
+      window.netlifyIdentity.close();
+    });
+    window.netlifyIdentity.on("logout", () => updateAuthUI(null));
+    
+    authBtn.addEventListener('click', () => {
+      if (window.netlifyIdentity.currentUser()) {
+        window.netlifyIdentity.logout();
+      } else {
+        window.netlifyIdentity.open();
+      }
+    });
+
+    // Initialize the widget
+    window.netlifyIdentity.init();
+  }
+
   checkDaily();
   updateUI();
   fetchAllLeaderboards();
@@ -197,6 +219,22 @@ function updateUI() {
   const marquee = document.getElementById('marquee-content');
   if (marquee) marquee.innerText = stringBase.repeat(10);
 }
+
+function updateAuthUI(user) {
+  const authBtn = document.getElementById('ui-auth');
+  if (!authBtn) return;
+
+  if (user) {
+    authBtn.textContent = 'LOGOUT';
+    authBtn.style.color = 'var(--neon-pink)';
+    // You can optionally sync player data here using user.id
+    console.log("User logged in:", user.email);
+  } else {
+    authBtn.textContent = 'LOGIN';
+    authBtn.style.color = 'var(--text-primary)';
+  }
+}
+
 
 function renderGrid() {
   const grid = document.getElementById('hub-grid');
