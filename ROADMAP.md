@@ -37,6 +37,7 @@ This document outlines the product strategy, upcoming features, and technical im
 - **Persistent Lobbies & Matchmaking:** Shift from manual 5-digit room codes to a dedicated lobby matchmaking queue utilizing a serverless Redis/Supabase backplane. 
 - **Friends Lists & Presence:** Allow authenticated users to add each other and see an active "Online/In-Game" status indicator on the Hub UI via WebSocket or server-sent events polling.
 - **Ghost Data Racing:** Allow players to download the "Ghost Data" of the #1 Global Leaderboard player for specific games (like fastest Reaction Blitz time) and visually compete against them locally.
+- **Freemium Tier Integration:** Keep all core games completely free forever. Introduce an optional "Vault Pass" (Premium) that provides an completely ad-free experience, unique neon cosmetic UI unlocks, and expanded cloud-save capacities.
 
 ---
 
@@ -53,3 +54,7 @@ This document outlines the product strategy, upcoming features, and technical im
    - Introduce Unit tests (Jest) for game physics/logic and E2E visual tests (Cypress/Playwright) to ensure controllers don't break during architectural updates.
 5. **~~Continuous Integration (CI/CD):~~** *(Done - GitHub Actions Pipeline & ESLint/Prettier configured)*
    - Add GitHub Actions to automate Netlify builds, run linting (ESLint/Prettier), and execute tests before pushing to production.
+6. **Freemium Architecture & Entitlements:**
+   - **Role-Based Access Control (RBAC):** Extend Netlify Identity to issue JWT metadata containing user tiers (Free vs. Premium). Guarantee that core gameplay routes remain unlocked and open to the public without paywalls.
+   - **Dynamic Ad Sub-System:** Implement lazy-loaded ad modules (e.g., Capacitor AdMob for native, web banners for desktop) that are conditionally initialized. Premium users should completely bypass ad-tracking scripts to save bandwidth.
+   - **Server-Side Validation:** Authoritatively validate purchases or unlocks for custom Hub UI themes and premium VIP features via Netlify Functions, preventing malicious clients from spoofing their "Premium" account status.
