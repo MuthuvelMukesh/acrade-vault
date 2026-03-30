@@ -110,6 +110,32 @@ export class SnakeGame extends BaseGame {
     if (e.key === 'ArrowRight' && this.dir.x === 0) this.nextDir = {x: 1, y: 0};
   }
 
+  exportState() {
+    return {
+      score: this.score,
+      snake: this.snake,
+      dir: this.dir,
+      nextDir: this.nextDir,
+      apple: this.apple,
+      golden: this.golden,
+      applesEaten: this.applesEaten,
+      speed: this.speed
+    };
+  }
+
+  importState(state) {
+    if (!state) return;
+    this.score = state.score || 0;
+    this.snake = state.snake || [];
+    this.dir = state.dir || {x:1, y:0};
+    this.nextDir = state.nextDir || {x:1, y:0};
+    this.apple = state.apple || this.spawnApple();
+    this.golden = state.golden || null;
+    this.applesEaten = state.applesEaten || 0;
+    this.speed = state.speed || 150;
+    this._updateHUD();
+  }
+
   destroy() {
     super.destroy();
     TouchControls.destroy();

@@ -92,6 +92,38 @@ export const Store = {
       console.warn('Player sync failed', e);
     }
   },
+  async loadGameState(gameId) {
+    const user = window.netlifyIdentity && window.netlifyIdentity.currentUser();
+    if (!user) {
+      return this.get(`arcade_save_${gameId}`);
+    }
+    try {
+      const res = await fetch(`/api/saves/${user.id}/${gameId}`);
+      if (res.ok) {
+        const data = await res.json();
+        return data.empty ? null : data;
+      }
+    } catch(e) {
+      console.warn('Cloud save load failed', e);
+    }
+    return null;
+  },
+  async saveGameState(gameId, stateData) {
+    const user = window.netlifyIdentity && window.netlifyIdentity.currentUser();
+    if (!user) {
+      this.set(`arcade_save_${gameId}`, stateData);
+      return;
+    }
+    try {
+      await fetch(`/api/saves/${user.id}/${gameId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(stateData)
+      });
+    } catch(e) {
+      console.warn('Cloud save failed', e);
+    }
+  },
   checkAchievements() {
     const p = State.player;
     const unlocked = [];

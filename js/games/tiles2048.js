@@ -157,5 +157,23 @@ export class Tiles2048Game extends BaseGame {
     if (['ArrowRight','d','D'].includes(e.key)) this.move('right');
   }
 
+  exportState() {
+    return {
+      grid: this.grid,
+      score: this.score,
+      milestone: this.milestone,
+      won: this.won
+    };
+  }
+
+  importState(state) {
+    if (!state) return;
+    this.grid = state.grid || this.grid;
+    this.score = state.score || 0;
+    this.milestone = state.milestone || 1000;
+    this.won = state.won || false;
+    this._updateHUD();
+  }
+
   destroy() { super.destroy(); TouchControls.destroy(); }
 }

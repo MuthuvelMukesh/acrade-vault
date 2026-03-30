@@ -30,9 +30,55 @@ export class BaseGame {
     this.rafId = requestAnimationFrame(this._loop);
   }
 
+  togglePause() {
+    if (this.isRunning) {
+      this.pause();
+      document.getElementById('pause-modal').style.display = 'flex';
+      // Hook up UI buttons for pause dynamically
+      const resumeBtn = document.getElementById('btn-resume-game');
+      const quitBtn = document.getElementById('btn-quit-paused');
+      const saveBtn = document.getElementById('btn-save-state');
+      const loadBtn = document.getElementById('btn-load-state');
+      
+      resumeBtn.onclick = () => {
+        document.getElementById('pause-modal').style.display = 'none';
+        this.resume();
+      };
+      quitBtn.onclick = () => {
+        document.getElementById('pause-modal').style.display = 'none';
+        this.over();
+      };
+      saveBtn.onclick = () => {
+        const state = this.exportState();
+        if (state) import('./store.js').then(m => m.Store.saveGameState(this.constructor.name, state));
+        saveBtn.innerText = 'SAVED!';
+        setTimeout(() => saveBtn.innerText = '☁️ SAVE STATE', 2000);
+      };
+      loadBtn.onclick = () => {
+        import('./store.js').then(async m => {
+          const state = await m.Store.loadGameState(this.constructor.name);
+          if (state) this.importState(state);
+          document.getElementById('pause-modal').style.display = 'none';
+          this.resume();
+        });
+      };
+    } else {
+      document.getElementById('pause-modal').style.display = 'none';
+      this.resume();
+    }
+  }
+
   pause() {
     this.isRunning = false;
     if (this.rafId) cancelAnimationFrame(this.rafId);
+  }
+
+  resume() {
+    if (!this.isRunning) {
+      this.isRunning = true;
+      this.lastTime = performance.now();
+      this.rafId = requestAnimationFrame(this._loop);
+    }
   }
 
   destroy() {
@@ -144,7 +190,16 @@ export class BaseGame {
   onKeyUp(e) {}
   onTouch(e) {}
 
-  _handleKeyDown(e) { this.onKeyDown(e); }
+  exportState() { return null; }
+  importState(stateData) {}
+
+  _handleKeyDown(e) {
+    if (e.key === State.controls.pause) {
+      this.togglePause();
+      return;
+    }
+    this.onKeyDown(e);
+  }
   _handleKeyUp(e) { this.onKeyUp(e); }
   _handleTouch(e) { this.onTouch(e); }
   

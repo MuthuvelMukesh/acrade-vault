@@ -95,6 +95,35 @@ async function savePlayer(initials, playerData) {
   return db.players[initials];
 }
 
+async function getGameState(userId, gameId) {
+  const key = `${userId}_${gameId}`;
+  try {
+    if (isNetlifyEnv) {
+      const store = getStore("saves");
+      return (await store.getJSON(key)) || null;
+    }
+  } catch(e) {}
+  const db = readLocalDB();
+  if (!db.saves) db.saves = {};
+  return db.saves[key] || null;
+}
+
+async function saveGameState(userId, gameId, stateData) {
+  const key = `${userId}_${gameId}`;
+  try {
+    if (isNetlifyEnv) {
+      const store = getStore("saves");
+      await store.setJSON(key, stateData);
+      return { success: true };
+    }
+  } catch(e) {}
+  const db = readLocalDB();
+  if (!db.saves) db.saves = {};
+  db.saves[key] = stateData;
+  writeLocalDB(db);
+  return { success: true };
+}
+
 // --- ROUTES ---
 const apiRouter = express.Router();
 
@@ -118,6 +147,16 @@ apiRouter.get('/players/:initials', async (req, res) => {
 apiRouter.post('/players/:initials', async (req, res) => {
   const updated = await savePlayer(req.params.initials, req.body);
   res.json({ success: true, player: updated });
+});
+
+apiRouter.get('/saves/:userId/:gameId', async (req, res) => {
+  const state = await getGameState(req.params.userId, req.params.gameId);
+  res.json(state || { empty: true });
+});
+
+apiRouter.post('/saves/:userId/:gameId', async (req, res) => {
+  const result = await saveGameState(req.params.userId, req.params.gameId, req.body);
+  res.json(result);
 });
 
 app.use('/api', apiRouter);

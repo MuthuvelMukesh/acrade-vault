@@ -9,11 +9,16 @@ This document serves as a chronological journal of updates, tracing our progress
 - [x] Custom Controls (Remapping UI & logic)
 - [x] Global Leaderboards (Connecting Netlify Blobs key-value cloud store)
 - [x] User Authentication & Profiles (OAuth integration via Netlify Identity)
-- [ ] Cloud Save States
+- [x] Cloud Save States
 
 ---
 
 ## 📅 Chronological Log
+
+### [v1.5.0] - Phase 2 Cloud Save States completed
+- **Backend**: Added secure `GET /api/saves/:userId/:gameId` and `POST /api/saves/:userId/:gameId` routes using Netlify Blobs.
+- **Frontend**: Created Pause UI modal overlay triggered by the custom `State.controls.pause` key dynamically. 
+- **Game Engine**: Refactored `js/base-game.js` to intercept pause logic, introducing `exportState()` and `importState()` standard override methods for individual game engines. Updated *Snake* and *2048* logic to stringify their grids onto the backend!
 
 ### [v1.4.0] - Phase 2 User Authentication
 - **Feature:** Added `netlify-identity-widget` out-of-the-box user authentication.
