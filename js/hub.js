@@ -4,6 +4,7 @@ import { Store } from './store.js';
 import { Router } from './router.js';
 import { FX } from './animator.js';
 import { Sound } from './audio.js';
+import { Multiplayer } from './multiplayer.js';
 
 const GAME_CATALOG = [
   { id: 'snake', title: 'PIXEL SNAKE', category: 'classic' },
@@ -11,7 +12,8 @@ const GAME_CATALOG = [
   { id: 'breaker', title: 'BLOCK BREAKER', category: 'action' },
   { id: 'tiles2048', title: '2048 TILES', category: 'puzzle' },
   { id: 'memory', title: 'MEMORY MATCH', category: 'puzzle' },
-  { id: 'reaction', title: 'REACTION BLITZ', category: 'action' }
+  { id: 'reaction', title: 'REACTION BLITZ', category: 'action' },
+  { id: 'pongvs', title: 'PONG VERSUS', category: 'multiplayer' }
 ];
 
 export function initHub() {
@@ -35,6 +37,42 @@ export function initHub() {
 
   document.getElementById('btn-quit-game').addEventListener('click', () => {
     Bus.emit('view:hub');
+  });
+
+  document.getElementById('btn-close-mp').addEventListener('click', () => {
+    document.getElementById('multiplayer-modal').style.display = 'none';
+  });
+
+  document.getElementById('btn-mp-join').addEventListener('click', async () => {
+    const code = document.getElementById('mp-join-input').value.toUpperCase();
+    if (!code || code.length !== 5) {
+      document.getElementById('mp-status').innerText = 'Enter 5-letter code.';
+      return;
+    }
+    document.getElementById('mp-status').innerText = 'Connecting...';
+    try {
+      await Multiplayer.join(code);
+    } catch (e) {
+      document.getElementById('mp-status').innerText = `Error: ${e.message}`;
+    }
+  });
+
+  Bus.on('mp:ready', (id) => {
+      const el = document.getElementById('mp-own-code');
+      if(el) el.innerText = id;
+      document.getElementById('mp-status').innerText = 'Waiting for opponent...';
+  });
+
+  Bus.on('mp:connected', () => {
+    document.getElementById('multiplayer-modal').style.display = 'none';
+    Bus.emit('game:launch', 'pongvs');
+  });
+
+  Bus.on('mp:error', (err) => {
+    const modal = document.getElementById('multiplayer-modal');
+    if (modal.style.display === 'block') {
+      document.getElementById('mp-status').innerText = `Error: ${err}`;
+    }
   });
 
   document.getElementById('ui-initials').addEventListener('click', () => {
@@ -272,6 +310,16 @@ function renderGrid() {
     // Launch game on card click or Enter key (TV remote support)
     const launch = () => {
       Sound.playCoin();
+      if (game.id === 'pongvs') {
+        const modal = document.getElementById('multiplayer-modal');
+        if (modal) {
+          modal.style.display = 'block';
+          document.getElementById('mp-own-code').innerText = 'Generating...';
+          document.getElementById('mp-status').innerText = '';
+          Multiplayer.init();
+        }
+        return;
+      }
       Bus.emit('game:launch', game.id);
     };
     card.addEventListener('click', (e) => {

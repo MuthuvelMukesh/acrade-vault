@@ -10,6 +10,7 @@ import { BreakerGame } from './games/breaker.js';
 import { Tiles2048Game } from './games/tiles2048.js';
 import { MemoryGame } from './games/memory.js';
 import { ReactionGame } from './games/reaction.js';
+import { PongVsGame } from './games/pong-vs.js';
 
 const GAMES = {
   'snake': SnakeGame,
@@ -17,7 +18,8 @@ const GAMES = {
   'breaker': BreakerGame,
   'tiles2048': Tiles2048Game,
   'memory': MemoryGame,
-  'reaction': ReactionGame
+  'reaction': ReactionGame,
+  'pongvs': PongVsGame
 };
 
 export const Router = {
