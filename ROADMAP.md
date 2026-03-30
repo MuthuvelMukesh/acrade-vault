@@ -61,3 +61,6 @@ This document outlines the product strategy, upcoming features, and technical im
 7. **Strict $0 Infrastructure Policy:**
    - Continue leveraging generous free tiers from platforms like Netlify (Hosting/Functions/Identity), Supabase (Postgres), or GitHub (Actions/Packages).
    - Ensure all future architectural decisions scale horizontally without forcing a mandatory paid upgrade on the developer side.
+8. **Database Architecture Evolution (Zero-Cost Scale):**
+   - **Transition from Blobs:** As User-Generated Content (custom levels) and the Virtual Currency Economy scale, migrate from flat-file Netlify Blobs to a structured, 100% free-tier database like **Supabase (PostgreSQL)** or **MongoDB Atlas (M0 Free Cluster)**.
+   - **Schema Design:** Design normalized data tables/collections for `Users` (syncing with Netlify Auth), `Ledger` (tracking premium unlocks and coin balances), and `Content` (level sharing) to guarantee long-term data integrity without occurring managed database subscription fees.
