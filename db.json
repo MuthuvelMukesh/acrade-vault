@@ -28,6 +28,48 @@
     ],
     "snake": [
       {
+        "initials": "TOP",
+        "score": 150,
+        "playerId": "anonymous",
+        "date": "2026-09-26T17:33:06.225Z"
+      },
+      {
+        "initials": "TOP",
+        "score": 150,
+        "playerId": "anonymous",
+        "date": "2026-09-26T17:34:27.339Z"
+      },
+      {
+        "initials": "TOP",
+        "score": 150,
+        "playerId": "anonymous",
+        "date": "2026-09-26T17:36:44.397Z"
+      },
+      {
+        "initials": "TOP",
+        "score": 150,
+        "playerId": "anonymous",
+        "date": "2026-09-26T18:02:05.337Z"
+      },
+      {
+        "initials": "TOP",
+        "score": 150,
+        "playerId": "anonymous",
+        "date": "2026-09-26T18:03:15.466Z"
+      },
+      {
+        "initials": "TOP",
+        "score": 150,
+        "playerId": "anonymous",
+        "date": "2026-09-26T18:07:47.889Z"
+      },
+      {
+        "initials": "TOP",
+        "score": 150,
+        "playerId": "anonymous",
+        "date": "2026-09-26T18:23:10.187Z"
+      },
+      {
         "initials": "AAA",
         "score": 0,
         "date": "2026-03-27T18:24:49.947Z"
@@ -73,6 +115,242 @@
         "FIRST_BLOOD"
       ],
       "gamesPlayed": 2
+    },
+    "test_player_1": {
+      "id": "test_player_1",
+      "progression": {
+        "level": 3,
+        "xp": 200,
+        "coins": 300
+      },
+      "achievements": [],
+      "inventory": {
+        "owned": [
+          "theme_neon_cyber",
+          "crt_classic",
+          "badge_novice",
+          "cab_standard",
+          "theme_amber_terminal"
+        ],
+        "equipped": {
+          "theme": "theme_amber_terminal",
+          "crt": "crt_classic",
+          "badge": "badge_novice",
+          "cabinet": "cab_standard"
+        }
+      },
+      "updatedAt": "2026-09-26T17:34:27.408Z"
+    },
+    "test_p_1790444204298": {
+      "id": "test_p_1790444204298",
+      "progression": {
+        "level": 2,
+        "xp": 100,
+        "coins": 100
+      },
+      "achievements": [],
+      "inventory": {
+        "owned": [
+          "theme_neon_cyber",
+          "crt_classic",
+          "badge_novice",
+          "cab_standard",
+          "theme_amber_terminal"
+        ],
+        "equipped": {
+          "theme": "theme_amber_terminal",
+          "crt": "crt_classic",
+          "badge": "badge_novice",
+          "cabinet": "cab_standard"
+        }
+      },
+      "updatedAt": "2026-09-26T17:36:44.486Z"
+    },
+    "test_p_1790445724590": {
+      "id": "test_p_1790445724590",
+      "progression": {
+        "level": 2,
+        "xp": 100,
+        "coins": 100
+      },
+      "achievements": [],
+      "inventory": {
+        "owned": [
+          "theme_neon_cyber",
+          "crt_classic",
+          "badge_novice",
+          "cab_standard",
+          "theme_amber_terminal"
+        ],
+        "equipped": {
+          "theme": "theme_amber_terminal",
+          "crt": "crt_classic",
+          "badge": "badge_novice",
+          "cabinet": "cab_standard"
+        }
+      },
+      "updatedAt": "2026-09-26T18:02:05.464Z"
+    },
+    "test_p_1790445795296": {
+      "id": "test_p_1790445795296",
+      "progression": {
+        "level": 2,
+        "xp": 100,
+        "coins": 100
+      },
+      "achievements": [],
+      "inventory": {
+        "owned": [
+          "theme_neon_cyber",
+          "crt_classic",
+          "badge_novice",
+          "cab_standard",
+          "theme_amber_terminal"
+        ],
+        "equipped": {
+          "theme": "theme_amber_terminal",
+          "crt": "crt_classic",
+          "badge": "badge_novice",
+          "cabinet": "cab_standard"
+        }
+      },
+      "updatedAt": "2026-09-26T18:03:15.823Z"
+    },
+    "test_p_1790446067444": {
+      "id": "test_p_1790446067444",
+      "progression": {
+        "level": 2,
+        "xp": 100,
+        "coins": 100
+      },
+      "achievements": [],
+      "inventory": {
+        "owned": [
+          "theme_neon_cyber",
+          "crt_classic",
+          "badge_novice",
+          "cab_standard",
+          "theme_amber_terminal"
+        ],
+        "equipped": {
+          "theme": "theme_amber_terminal",
+          "crt": "crt_classic",
+          "badge": "badge_novice",
+          "cabinet": "cab_standard"
+        }
+      },
+      "updatedAt": "2026-09-26T18:07:48.286Z"
+    },
+    "test_p_1790446989474": {
+      "id": "test_p_1790446989474",
+      "progression": {
+        "level": 2,
+        "xp": 100,
+        "coins": 100
+      },
+      "achievements": [],
+      "inventory": {
+        "owned": [
+          "theme_neon_cyber",
+          "crt_classic",
+          "badge_novice",
+          "cab_standard",
+          "theme_amber_terminal"
+        ],
+        "equipped": {
+          "theme": "theme_amber_terminal",
+          "crt": "crt_classic",
+          "badge": "badge_novice",
+          "cabinet": "cab_standard"
+        }
+      },
+      "updatedAt": "2026-09-26T18:23:10.510Z"
+    }
+  },
+  "saves": {
+    "test_player_1_snake": {
+      "score": 420,
+      "snake": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        }
+      ],
+      "savedAt": "2026-09-26T17:34:27.434Z"
+    },
+    "test_p_1790444204298_snake": {
+      "score": 420,
+      "snake": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        }
+      ],
+      "savedAt": "2026-09-26T17:36:44.495Z"
+    },
+    "test_p_1790445724590_snake": {
+      "score": 420,
+      "snake": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        }
+      ],
+      "savedAt": "2026-09-26T18:02:05.476Z"
+    },
+    "test_p_1790445795296_snake": {
+      "score": 420,
+      "snake": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        }
+      ],
+      "savedAt": "2026-09-26T18:03:15.869Z"
+    },
+    "test_p_1790446067444_snake": {
+      "score": 420,
+      "snake": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        }
+      ],
+      "savedAt": "2026-09-26T18:07:48.317Z"
+    },
+    "test_p_1790446989474_snake": {
+      "score": 420,
+      "snake": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 6
+        }
+      ],
+      "savedAt": "2026-09-26T18:23:10.541Z"
     }
   }
 }
