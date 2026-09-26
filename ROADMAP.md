@@ -1,66 +1,41 @@
 # Arcade Vault - Product Plan & Roadmap
 
-This document outlines the product strategy, upcoming features, and technical improvements planned for **Arcade Vault**. 
-
-## 🚀 Current State
-- **Core Engine:** HTML5 Canvas based games with a universal underlying game loop (`base-game.js`).
-- **Zero-Cost Infrastructure:** 100% Free-tier serverless architecture. Optimized for Netlify (Functions, Identity, Blobs) and GitHub Actions (CI/CD) to ensure hosting, development, and deployment always cost $0.
-- **Controls & Accessibility:** Global support for keyboard, multi-touch mobile screens (virtual D-Pad), and TV Remotes / Bluetooth Controllers (Gamepad API).
+This document outlines the product strategy, delivery status, and technical improvements for **Arcade Vault**.
 
 ---
 
-## 📅 Product Plan
+## 🚀 Platform Status: V2.0 Production-Ready
 
-### Phase 1: Short-Term (1-3 Months) - "Retention & Polish"
-- **~~Progressive Web App (PWA):~~** Add a `manifest.json` and Service Workers to allow users to "Install" the app on their phone/TV and play offline. *(Done)*
-- **~~Local High Scores:~~** Implement `localStorage` caching so users don't lose their best scores when they close the browser. *(Done)*
-- **~~New Games:~~** Add 2-3 new classic game clones (e.g., Tetris, Breakout, or Pac-Man) using the existing `base-game.js` boilerplate. *(Done - We have 7 distinct games)*
-- **~~Sound & Haptics:~~** Add an Audio engine (`Howler.js` or native Web Audio API) for 8-bit sound effects. Add Mobile device vibration API for button presses and collisions. *(Done - Web Audio API & `navigator.vibrate()` implemented)*
+Arcade Vault has transformed from an experimental mini-game collection into a coherent, cross-platform arcade gaming platform with identity, progression, security, and cloud synchronization.
 
-### Phase 2: Medium-Term (3-6 Months) - "Community & Cloud"
-- **~~Global Leaderboards:~~** Utilize our Netlify Functions (`api/index.js`) hooked to a lightweight database (like Supabase, Firebase, or MongoDB) to store and fetch top 10 global scores. *(Done - Netlify Blobs)*
-- **~~User Authentication:~~** Simple login system (e.g., Google/GitHub OAuth) to track player progress across multiple devices (Mobile to TV). *(Done - Netlify Identity Widget)*
-- **~~Customizable Controls:~~** Allow users to remap keyboard keys or Gamepad buttons in an options menu. *(Done)*
-- **~~Save States:~~** Allow users to pause and save their exact game state in the cloud. *(Done - Integrated with Netlify Blobs & Netlify Identity)*
+### ✅ Completed V2 Milestones
 
-### Phase 3: Long-Term (6+ Months) - "Expansion & Multiplayer"
-- **~~Real-Time Multiplayer:~~** Introduce WebSockets/Socket.io to allow head-to-head network play (e.g., Pong-Vs or Co-op Snake). *(Done - WebRTC/PeerJS P2P)*
-- **~~Achievements & Trophies System:~~** Unlockable badges for reaching certain milestones in different games. *(Done - Integrated `store.js` engine + Toast Modals)*
-- **~~Native App Packaging:~~** Use tools like Capacitor or Tauri to wrap the web app into a native `.apk` (Android) or Windows executable to distribute on app stores. *(Done - `@capacitor/core` initialized w/ `build:mobile` script)*
-
-### Phase 4: The Meta-Game & Player Economy (Next Up)
-- **Virtual Currency Store:** Provide a marketplace where players can spend `State.player.coins` earned in-game to purchase custom Hub UI themes, neon color palettes, or unique background CRT overlays.
-- **User-Generated Content (Level Editor):** Implement an in-browser visual grid editor for "Block Breaker" (or other spatial games). Save these custom tile maps to Netlify Blobs so players can share 5-digit level codes with friends.
-- **AI Competitors:** Train basic offline AI bots for "Pong-Vs" to dynamically scale difficulty depending on the player's active win streak.
-
-### Phase 5: Deep Social Integration (Future Vision)
-- **Persistent Lobbies & Matchmaking:** Shift from manual 5-digit room codes to a dedicated lobby matchmaking queue utilizing a serverless Redis/Supabase backplane (staying strictly within their generous Free Tiers). 
-- **Friends Lists & Presence:** Allow authenticated users to add each other and see an active "Online/In-Game" status indicator on the Hub UI via WebSocket or server-sent events polling.
-- **Ghost Data Racing:** Allow players to download the "Ghost Data" of the #1 Global Leaderboard player for specific games (like fastest Reaction Blitz time) and visually compete against them locally.
-- **Freemium Tier Integration:** Keep all core games completely free forever. Introduce an optional "Vault Pass" (Premium) that provides an completely ad-free experience, unique neon cosmetic UI unlocks, and expanded cloud-save capacities.
+- [x] **Core Game Engine V2 (`BaseGame`)**: Complete lifecycle enforcement (`init`, `start`, `update(dt)`, `render`, `pause`, `resume`, `reset`, `destroy`), input hooks, Gamepad API polling, and full serialization (`exportState`, `importState`) across all 7 games.
+- [x] **Centralized Game Registry (`GameRegistry`)**: Decoupled game metadata, capability flags, and factory instantiations from view controllers.
+- [x] **Server-Authoritative Player Identity V2**: Stable server-signed player identifiers (`p_<id>.<sig>`), Netlify Identity JWT support, and automatic backward-compatible migration for V1 profiles.
+- [x] **Anti-Cheat & Leaderboard Security**: Server-side game physics models, score bounds validation, rate limiting, and replay prevention.
+- [x] **Progression System & Meta-Game**: Centralized `ProgressionManager`, `RewardManager`, `AchievementManager`, deterministic daily challenges, and milestone badges.
+- [x] **Virtual Economy & Cosmetic Shop**: Server-authoritative cosmetic catalog, transactions, and real-time applied themes, CRT effects, cabinet styles, and badges.
+- [x] **Offline-First PWA & Cloud Synchronization (`SyncManager`)**: Offline mutation queue, background retry with backoff, network status detection, and multi-tier Service Worker caching.
+- [x] **Multiplayer V2 Protocol**: WebRTC PeerJS architecture with structured message envelopes, ping/pong latency measurement, and lobby lifecycle management.
+- [x] **Native Android Package (Capacitor)**: Tested and verified release build with ProGuard/R8 rules, JDK 21 LTS, Gradle 8, and Android back-button popstate navigation.
+- [x] **Authoritative CI/CD Pipeline & 100% Quality Gates**: Automated linting with flat ESLint config, Jest unit/integration/API testing suites, and production web bundle verification.
 
 ---
 
-## 🛠️ Technical Future Improvements (Developer Backlog)
+## 📅 Future Roadmap (V2.x & V3)
 
-1. **~~Asset Management & Preloading:~~** *(Done - `AssetLoader` class implemented for scalable pre-fetching)*
-   - Create an asset loader that pre-fetches all images/sprites and audio files before the hub loads, avoiding missing frames during initial gameplay.
-   - Combine isolated images into Sprite Sheets to reduce HTTP requests.
-2. **~~State Management Refactor:~~** *(Done - Deep reactive Proxy store implemented over the `Bus` emitter)*
-   - Move away from raw global variables and DOM manipulation, possibly integrating a lightweight state manager if the application's complexity scales.
-3. **Advanced Rendering:**
-   - If games become more graphically intense, migrate from `Canvas 2D API` to `WebGL` (using PixiJS or Three.js) for hardware-accelerated 60fps locking on lower-end TVs.
-4. **~~Testing Pipeline:~~** *(Done - Jest initialized with baseline unit tests)*
-   - Introduce Unit tests (Jest) for game physics/logic and E2E visual tests (Cypress/Playwright) to ensure controllers don't break during architectural updates.
-5. **~~Continuous Integration (CI/CD):~~** *(Done - GitHub Actions Pipeline & ESLint/Prettier configured)*
-   - Add GitHub Actions to automate Netlify builds, run linting (ESLint/Prettier), and execute tests before pushing to production.
-6. **Freemium Architecture & Entitlements:**
-   - **Role-Based Access Control (RBAC):** Extend Netlify Identity to issue JWT metadata containing user tiers (Free vs. Premium). Guarantee that core gameplay routes remain unlocked and open to the public without paywalls.
-   - **Dynamic Ad Sub-System:** Implement lazy-loaded ad modules (e.g., Capacitor AdMob for native, web banners for desktop) that are conditionally initialized. Premium users should completely bypass ad-tracking scripts to save bandwidth.
-   - **Server-Side Validation:** Authoritatively validate purchases or unlocks for custom Hub UI themes and premium VIP features via Netlify Functions, preventing malicious clients from spoofing their "Premium" account status.
-7. **Strict $0 Infrastructure Policy:**
-   - Continue leveraging generous free tiers from platforms like Netlify (Hosting/Functions/Identity), Supabase (Postgres), or GitHub (Actions/Packages).
-   - Ensure all future architectural decisions scale horizontally without forcing a mandatory paid upgrade on the developer side.
-8. **Database Architecture Evolution (Zero-Cost Scale):**
-   - **Transition from Blobs:** As User-Generated Content (custom levels) and the Virtual Currency Economy scale, migrate from flat-file Netlify Blobs to a structured, 100% free-tier database like **Supabase (PostgreSQL)** or **MongoDB Atlas (M0 Free Cluster)**.
-   - **Schema Design:** Design normalized data tables/collections for `Users` (syncing with Netlify Auth), `Ledger` (tracking premium unlocks and coin balances), and `Content` (level sharing) to guarantee long-term data integrity without occurring managed database subscription fees.
+### V2.1 — Social & Community Meta
+- **Level Sharing (UGC)**: Visual tile grid editor for Block Breaker with 5-digit shareable room codes saved to cloud storage.
+- **Ghost Data Racing**: Download and visualize ghost racer replay data for Reaction Blitz benchmark runs.
+- **Adaptive AI Bots**: Dynamic scaling offline bot opponent for Pong Versus when playing solo.
+
+### V2.2 — Enhanced Matchmaking & Audio
+- **Lobby Queue**: Serverless matchmaking pool replacing manual room code exchanges.
+- **Expanded Chiptune Soundtracks**: Procedural background chiptune arpeggios per game using native Web Audio oscillators.
+- **Controller Vibration Profiles**: Custom tactile vibration patterns for boss hits, level completions, and low health.
+
+### V3.0 — Platform Expansion
+- **WebGPU / WebGL Hardware Acceleration**: Migrate complex particle systems and sprite batches to WebGL/PixiJS.
+- **Desktop Packaging**: Lightweight Tauri / Electron packaging for Windows, macOS, and Linux desktop stores.
+- **Cross-Platform Tournaments**: Time-boxed weekly arcade tournaments with cosmetic prize trophies.
