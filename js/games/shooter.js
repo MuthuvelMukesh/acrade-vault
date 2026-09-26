@@ -86,11 +86,7 @@ export class ShooterGame extends BaseGame {
             this.addScore(e.type==='boss'? 500 : 10);
             if (e.type === 'boss') {
               Bus.emit('coin:earn', 5);
-              if(!State.player.achievements.includes('ACE_PILOT')) {
-                 State.player.achievements.push('ACE_PILOT');
-                 Bus.emit('achievement:unlock', 'ACE_PILOT');
-                 State.player.savePlayer && State.player.savePlayer();
-              }
+              Bus.emit('achievement:check', { type: 'BOSS_DEFEATED', game: 'shooter', bossDefeated: true });
               this.boss = null;
             }
             this.createExplosion(e.x, e.y);
@@ -188,6 +184,26 @@ export class ShooterGame extends BaseGame {
       this.player.x = x;
       this.shoot();
     }
+  }
+
+  exportState() {
+    return {
+      score: this.score,
+      wave: this.wave,
+      player: { x: this.player.x, y: this.player.y }
+    };
+  }
+
+  importState(state) {
+    if (!state) return;
+    this.score = state.score || 0;
+    this.wave = state.wave || 1;
+    if (state.player) {
+      this.player.x = state.player.x;
+      this.player.y = state.player.y;
+    }
+    this.updateHUDExtra(`WAVE ${this.wave}`);
+    this._updateHUD();
   }
 
   destroy() { super.destroy(); TouchControls.destroy(); }

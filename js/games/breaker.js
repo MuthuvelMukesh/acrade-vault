@@ -160,4 +160,25 @@ export class BreakerGame extends BaseGame {
     this.canvas.addEventListener('touchmove', this._handleTouch, {passive: false});
     this.canvas.addEventListener('mousemove', this._handleTouch);
   }
+
+  exportState() {
+    return {
+      score: this.score,
+      level: this.level,
+      paddle: { ...this.paddle },
+      ball: { ...this.ball },
+      bricks: this.bricks
+    };
+  }
+
+  importState(state) {
+    if (!state) return;
+    this.score = state.score || 0;
+    this.level = state.level || 1;
+    if (state.paddle) this.paddle = { ...state.paddle };
+    if (state.ball) this.ball = { ...state.ball };
+    if (state.bricks) this.bricks = state.bricks;
+    this.updateHUDExtra(`LVL ${this.level}`);
+    this._updateHUD();
+  }
 }

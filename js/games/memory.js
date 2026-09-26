@@ -138,4 +138,23 @@ export class MemoryGame extends BaseGame {
     this.second = null;
     this.lock = false;
   }
+
+  exportState() {
+    return {
+      score: this.score,
+      moves: this.moves,
+      matches: this.matches,
+      cards: this.cards
+    };
+  }
+
+  importState(state) {
+    if (!state) return;
+    this.score = state.score || 0;
+    this.moves = state.moves || 0;
+    this.matches = state.matches || 0;
+    if (state.cards) this.cards = state.cards;
+    this.updateHUDExtra(`MOVES: ${this.moves}`);
+    this._updateHUD();
+  }
 }

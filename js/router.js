@@ -1,29 +1,13 @@
 import { State } from './state.js';
-import { Bus } from './bus.js';
+import { Bus, Events } from './bus.js';
 import { Store } from './store.js';
 import { FX } from './animator.js';
-
-// Game Importers (Lazy or Direct - will be direct for simplicity)
-import { SnakeGame } from './games/snake.js';
-import { ShooterGame } from './games/shooter.js';
-import { BreakerGame } from './games/breaker.js';
-import { Tiles2048Game } from './games/tiles2048.js';
-import { MemoryGame } from './games/memory.js';
-import { ReactionGame } from './games/reaction.js';
-import { PongVsGame } from './games/pong-vs.js';
-
-const GAMES = {
-  'snake': SnakeGame,
-  'shooter': ShooterGame,
-  'breaker': BreakerGame,
-  'tiles2048': Tiles2048Game,
-  'memory': MemoryGame,
-  'reaction': ReactionGame,
-  'pongvs': PongVsGame
-};
+import { getGameById } from './game-registry.js';
+import { RewardManager } from './progression.js';
 
 export const Router = {
   currentGameInstance: null,
+  gameStartTime: 0,
 
   showHub() {
     if (this.currentGameInstance) {
@@ -31,61 +15,84 @@ export const Router = {
       this.currentGameInstance = null;
     }
     State.view = 'hub';
+    State.activeGame = null;
     document.getElementById('game-overlay').style.display = 'none';
-    document.getElementById('hub-grid').style.display = 'grid';
+    const hubGrid = document.getElementById('hub-grid');
+    if (hubGrid) hubGrid.style.display = 'grid';
+    const hubView = document.getElementById('hub-view-container');
+    if (hubView) hubView.style.display = 'block';
   },
 
   launchGame(gameId) {
-    if (!GAMES[gameId]) return;
-    
+    const gameDef = getGameById(gameId);
+    if (!gameDef) {
+      console.warn(`Game not found in registry: ${gameId}`);
+      return;
+    }
+
     State.view = 'game';
     State.activeGame = gameId;
-    
+    this.gameStartTime = Date.now();
+
+    if (typeof history !== 'undefined' && history.pushState) {
+      history.pushState({ view: 'game', gameId }, '');
+    }
+
     const overlay = document.getElementById('game-overlay');
     overlay.style.display = 'flex';
-    document.getElementById('hub-grid').style.display = 'none';
-    
+
+    const hubGrid = document.getElementById('hub-grid');
+    if (hubGrid) hubGrid.style.display = 'none';
+    const hubView = document.getElementById('hub-view-container');
+    if (hubView) hubView.style.display = 'none';
+
     const canvas = document.getElementById('game-canvas');
     const wrapper = document.querySelector('.canvas-wrapper');
-    
+
     FX.powerOnCRT(wrapper);
-    
-    const GameClass = GAMES[gameId];
-    this.currentGameInstance = new GameClass(canvas, (data) => this.handleGameOver(gameId, data));
-    
+
+    // Instantiate game from registry factory
+    this.currentGameInstance = gameDef.factory(canvas, (data) => this.handleGameOver(gameId, data));
     this.currentGameInstance.init();
     this.currentGameInstance.start();
-    
-    State.player.gamesPlayed++;
-    State.player.playCounts = State.player.playCounts || {};
-    State.player.playCounts[gameId] = (State.player.playCounts[gameId] || 0) + 1;
-    Store.savePlayer();
   },
 
   async handleGameOver(gameId, result) {
     if (result.error) {
-      alert("GAME ERROR - Returning to hub");
-      Bus.emit('view:hub');
+      console.warn('Game ended with error. Returning to hub.');
+      Bus.emit(Events.VIEW_HUB);
       return;
     }
-    
+
+    const durationSec = Math.round((Date.now() - this.gameStartTime) / 1000);
     const player = Store.getPlayer();
-    if(player.initials) {
-       await Store.addScore(gameId, player.initials, result.score);
+
+    // Authoritative progression and reward calculation
+    const rewards = RewardManager.evaluateGameCompletion(gameId, result.score, durationSec);
+
+    if (player.profile.initials) {
+      await Store.addScore(gameId, player.profile.initials, result.score);
     }
-    
-    Store.checkAchievements();
-    
-    // Show custom modal instead of confirm()
+
+    Store.savePlayer();
+
+    // Show modal with score and rewards
     const modal = document.getElementById('game-over-modal');
     document.getElementById('go-score').innerText = result.score;
+
+    // Display XP and Coins earned on modal if element exists
+    const rewardEl = document.getElementById('go-rewards');
+    if (rewardEl) {
+      rewardEl.innerHTML = `<span style="color:var(--neon-green)">+${rewards.xpEarned} XP</span> · <span style="color:var(--neon-yellow)">+${rewards.coinsEarned} 🪙</span>`;
+    }
+
     modal.style.display = 'flex';
 
     // Clear old listeners by cloning
     const btnPlay = document.getElementById('btn-play-again');
     const newPlay = btnPlay.cloneNode(true);
     btnPlay.parentNode.replaceChild(newPlay, btnPlay);
-    
+
     const btnHub = document.getElementById('btn-back-hub');
     const newHub = btnHub.cloneNode(true);
     btnHub.parentNode.replaceChild(newHub, btnHub);
@@ -97,7 +104,7 @@ export const Router = {
 
     newHub.addEventListener('click', () => {
       modal.style.display = 'none';
-      Bus.emit('view:hub');
+      Bus.emit(Events.VIEW_HUB);
     });
   }
 };

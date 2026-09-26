@@ -1,7 +1,6 @@
 import { BaseGame } from '../base-game.js';
 import { Bus } from '../bus.js';
 import { TouchControls } from '../touch-controls.js';
-import { State } from '../state.js';
 
 export class SnakeGame extends BaseGame {
   init() {

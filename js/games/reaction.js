@@ -94,4 +94,21 @@ export class ReactionGame extends BaseGame {
       setTimeout(() => this.nextRound(), 1000);
     }
   }
+
+  exportState() {
+    return {
+      score: this.score,
+      stage: this.stage,
+      results: this.results
+    };
+  }
+
+  importState(state) {
+    if (!state) return;
+    this.score = state.score || 0;
+    this.stage = state.stage || 0;
+    this.results = state.results || [];
+    this.updateHUDExtra(`ROUND ${this.stage}/5`);
+    this._updateHUD();
+  }
 }

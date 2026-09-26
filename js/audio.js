@@ -58,7 +58,6 @@ export const Sound = {
   
   playExplosion() {
     if (!audioCtx) return;
-    const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     
     // Create noise for explosion
