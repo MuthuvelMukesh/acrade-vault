@@ -1,8 +1,9 @@
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const BUILD_DIR = path.join(__dirname, '../dist');
-const DIRS_TO_COPY = ['js', 'styles'];
+const DIRS_TO_COPY = ['js', 'styles', 'assets'];
 const FILES_TO_COPY = ['index.html', 'manifest.json', 'sw.js'];
 
 // Clean build dir
@@ -23,16 +24,29 @@ function copyDir(src, dest) {
 
 // Copy DIRS
 DIRS_TO_COPY.forEach(dir => {
-  if(fs.existsSync(path.join(__dirname, '../', dir))) {
-    copyDir(path.join(__dirname, '../', dir), path.join(BUILD_DIR, dir));
+  const dirPath = path.join(__dirname, '../', dir);
+  if (fs.existsSync(dirPath)) {
+    copyDir(dirPath, path.join(BUILD_DIR, dir));
   }
 });
 
 // Copy FILES
 FILES_TO_COPY.forEach(file => {
-  if (fs.existsSync(path.join(__dirname, '../', file))) {
-    fs.copyFileSync(path.join(__dirname, '../', file), path.join(BUILD_DIR, file));
+  const filePath = path.join(__dirname, '../', file);
+  if (fs.existsSync(filePath)) {
+    fs.copyFileSync(filePath, path.join(BUILD_DIR, file));
   }
 });
 
 console.log('Build completed to /dist');
+
+// If --mobile flag passed, copy to native Capacitor containers
+if (process.argv.includes('--mobile')) {
+  console.log('Syncing assets to Capacitor mobile shell...');
+  try {
+    execSync('npx cap copy', { stdio: 'inherit' });
+    console.log('Capacitor mobile sync complete.');
+  } catch (err) {
+    console.warn('Capacitor sync notice:', err.message);
+  }
+}

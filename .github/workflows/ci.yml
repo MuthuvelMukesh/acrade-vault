@@ -26,8 +26,9 @@ jobs:
 
     - name: Run Linter
       run: npm run lint
-      continue-on-error: true # Warning only for now
 
     - name: Run Tests
       run: npm test
-      continue-on-error: true # Warning only for now
+
+    - name: Run Production Web Build
+      run: npm run build

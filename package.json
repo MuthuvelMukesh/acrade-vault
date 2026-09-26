@@ -79,7 +79,9 @@
     "test": "jest",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "build:mobile": "node scripts/build.js && npx cap copy"
+    "build": "node scripts/build.js",
+    "build:mobile": "node scripts/build.js --mobile",
+    "start": "node api/index.js"
   },
   "repository": {
     "type": "git",
@@ -94,7 +96,17 @@
   },
   "homepage": "https://github.com/MuthuvelMukesh/acrade-vault#readme",
   "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
     "@capacitor/android": "^8.3.0",
-    "@capacitor/cli": "^8.3.0"
+    "@capacitor/cli": "^8.3.0",
+    "@eslint/js": "^10.0.1",
+    "babel-jest": "^30.5.2",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0",
+    "jest": "^30.5.2",
+    "jest-environment-jsdom": "^30.5.2",
+    "prettier": "^3.9.9",
+    "supertest": "^7.3.0"
   }
 }
