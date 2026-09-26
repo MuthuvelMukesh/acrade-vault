@@ -1,3 +1,7 @@
+/* =========================================================
+   Arcade Vault V2 CRT, Effects & Dynamic Theme Presets
+   ========================================================= */
+
 .crt-screen {
   position: relative;
 }
@@ -44,4 +48,132 @@ body.crt-screen::before, body.crt-screen::after {
 
 .flash-fx {
   animation: flash 0.3s ease-out;
+}
+
+/* =========================================================
+   DYNAMIC CRT VARIANTS
+   ========================================================= */
+body.crt-vhs::after {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 0, 85, 0.08),
+    rgba(0, 229, 255, 0.08) 3px,
+    transparent 3px,
+    transparent 6px
+  );
+  filter: contrast(110%) saturate(120%);
+}
+
+body.crt-phosphor::before {
+  background: radial-gradient(rgba(57, 255, 20, 0.05) 40%, rgba(0, 0, 0, 0.7) 100%);
+  box-shadow: inset 0 0 50px rgba(57, 255, 20, 0.2);
+}
+
+body.crt-vector {
+  filter: drop-shadow(0 0 2px var(--neon-cyan));
+}
+
+/* =========================================================
+   DYNAMIC COSMETIC THEME PALETTES
+   ========================================================= */
+/* Amber Terminal */
+body.theme-amber-terminal {
+  --color-void:        #0c0600;
+  --color-cabinet:     #170c01;
+  --color-screen:      #120a00;
+  --color-bezel:       #291501;
+  --color-panel:       #381e02;
+  --color-border:      #5c3205;
+  --neon-green:        #ffb000;
+  --neon-cyan:         #ff9400;
+  --neon-pink:         #ff5500;
+  --neon-yellow:       #ffd000;
+  --neon-purple:       #e06600;
+  --text-primary:      #ffe8cc;
+  --text-secondary:    #cc8e35;
+  --glow-cyan:         0 0 10px #ff9400, 0 0 30px rgba(255,148,0,0.4);
+  --glow-green:        0 0 10px #ffb000, 0 0 30px rgba(255,176,0,0.4);
+  --glow-yellow:       0 0 10px #ffd000, 0 0 30px rgba(255,208,0,0.4);
+}
+
+/* 8-Bit Monolith (GameBoy) */
+body.theme-gameboy {
+  --color-void:        #0f380f;
+  --color-cabinet:     #184518;
+  --color-screen:      #205020;
+  --color-bezel:       #306230;
+  --color-panel:       #387038;
+  --color-border:      #4a824a;
+  --neon-green:        #8bac0f;
+  --neon-cyan:         #9bbc0f;
+  --neon-pink:         #306230;
+  --neon-yellow:       #9bbc0f;
+  --neon-purple:       #8bac0f;
+  --text-primary:      #9bbc0f;
+  --text-secondary:    #8bac0f;
+  --glow-cyan:         0 0 10px #9bbc0f, 0 0 20px rgba(155,188,15,0.3);
+  --glow-green:        0 0 10px #8bac0f, 0 0 20px rgba(139,172,15,0.3);
+  --glow-yellow:       0 0 10px #9bbc0f, 0 0 20px rgba(155,188,15,0.3);
+}
+
+/* Outrun Synthwave */
+body.theme-synthwave {
+  --color-void:        #0d041a;
+  --color-cabinet:     #180833;
+  --color-screen:      #1e0a3d;
+  --color-bezel:       #2a0f52;
+  --color-panel:       #38156d;
+  --color-border:      #5720a8;
+  --neon-green:        #05ffa1;
+  --neon-cyan:         #01cdfe;
+  --neon-pink:         #ff71ce;
+  --neon-yellow:       #fffb96;
+  --neon-purple:       #b967ff;
+  --text-primary:      #fdf7ff;
+  --text-secondary:    #c4a1eb;
+  --glow-cyan:         0 0 10px #01cdfe, 0 0 30px rgba(1,205,254,0.4);
+  --glow-pink:         0 0 10px #ff71ce, 0 0 30px rgba(255,113,206,0.4);
+  --glow-yellow:       0 0 10px #fffb96, 0 0 30px rgba(255,251,150,0.4);
+}
+
+/* The Construct (Matrix) */
+body.theme-matrix {
+  --color-void:        #010901;
+  --color-cabinet:     #031403;
+  --color-screen:      #051c05;
+  --color-bezel:       #092b09;
+  --color-panel:       #0e3d0e;
+  --color-border:      #155915;
+  --neon-green:        #00ff41;
+  --neon-cyan:         #00d035;
+  --neon-pink:         #008f11;
+  --neon-yellow:       #70ff80;
+  --neon-purple:       #00ff41;
+  --text-primary:      #00ff41;
+  --text-secondary:    #009922;
+  --glow-cyan:         0 0 10px #00ff41, 0 0 30px rgba(0,255,65,0.4);
+  --glow-green:        0 0 10px #00ff41, 0 0 30px rgba(0,255,65,0.4);
+  --glow-yellow:       0 0 10px #70ff80, 0 0 30px rgba(112,255,128,0.4);
+}
+
+/* =========================================================
+   CABINET EDITIONS
+   ========================================================= */
+body.cab-gold .logo {
+  color: #ffd700;
+  text-shadow: 0 0 10px #ffd700, 0 0 25px rgba(255, 215, 0, 0.6);
+}
+body.cab-gold header#top-bar {
+  border-bottom: 2px solid #ffd700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+body.cab-carbon {
+  background-color: var(--color-void);
+  background-image: 
+    linear-gradient(45deg, #111 25%, transparent 25%), 
+    linear-gradient(-45deg, #111 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #111 75%), 
+    linear-gradient(-45deg, transparent 75%, #111 75%);
+  background-size: 20px 20px;
 }

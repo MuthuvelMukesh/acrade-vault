@@ -344,4 +344,190 @@
   background: var(--neon-pink);
   color: var(--color-void);
 }
-.modal-content { animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; } 
+.modal-content { animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+/* =========================================================
+   ARCADE VAULT V2 COMPONENTS
+   ========================================================= */
+
+/* Sync Status Indicator */
+.sync-status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-family: var(--font-arcade);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--color-screen);
+  border: 1px solid var(--color-border);
+  color: var(--text-secondary);
+}
+.sync-status-indicator.saved { border-color: var(--neon-green); color: var(--neon-green); }
+.sync-status-indicator.saving { border-color: var(--neon-yellow); color: var(--neon-yellow); }
+.sync-status-indicator.offline { border-color: var(--text-muted); color: var(--text-muted); }
+.sync-status-indicator.syncing { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+.sync-status-indicator.error { border-color: var(--neon-pink); color: var(--neon-pink); }
+
+/* Daily Challenge Banner */
+.challenge-banner {
+  background: linear-gradient(90deg, rgba(30,10,50,0.8), rgba(15,20,35,0.8));
+  border: 1px solid var(--neon-purple);
+  box-shadow: 0 0 15px rgba(191, 0, 255, 0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-arcade);
+}
+
+.challenge-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.challenge-title {
+  color: var(--neon-yellow);
+  font-size: 11px;
+}
+
+.challenge-desc {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.challenge-bounty {
+  font-size: 10px;
+  color: var(--neon-cyan);
+}
+
+/* Shop Layout & Items */
+.shop-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.shop-filter-bar {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+
+.shop-card {
+  background: var(--color-bezel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-3);
+  text-align: left;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.shop-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.shop-card.equipped {
+  border-color: var(--neon-green);
+  box-shadow: var(--glow-green);
+}
+
+.shop-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.shop-item-name {
+  font-family: var(--font-arcade);
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.shop-item-category {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.shop-item-desc {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.shop-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-panel);
+}
+
+.shop-price-tag {
+  font-family: var(--font-arcade);
+  font-size: 12px;
+  color: var(--neon-yellow);
+}
+
+.btn-shop-action {
+  font-family: var(--font-arcade);
+  font-size: 10px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-buy {
+  background: var(--neon-yellow);
+  color: var(--color-void);
+  border: 1px solid var(--neon-yellow);
+}
+.btn-buy:hover {
+  background: transparent;
+  color: var(--neon-yellow);
+  box-shadow: var(--glow-yellow);
+}
+
+.btn-equip {
+  background: transparent;
+  color: var(--neon-cyan);
+  border: 1px solid var(--neon-cyan);
+}
+.btn-equip:hover {
+  background: var(--neon-cyan);
+  color: var(--color-void);
+}
+
+.tag-equipped {
+  color: var(--neon-green);
+  font-family: var(--font-arcade);
+  font-size: 10px;
+  padding: 4px 8px;
+  border: 1px solid var(--neon-green);
+  border-radius: var(--radius-sm);
+}
+ 
